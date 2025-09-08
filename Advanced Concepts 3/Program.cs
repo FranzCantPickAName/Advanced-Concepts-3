@@ -11,9 +11,11 @@ namespace Advanced_Concepts_3
 
             MyDelegateType myDelegate;
 
-            myDelegate = new MyDelegateType(s.Add);
+            myDelegate = s.Add;
 
-            Console.WriteLine(myDelegate.Invoke(30, 40));
+            myDelegate += s.Multiply;
+
+            myDelegate.Invoke(40, 10);
 
             Console.ReadKey();
         }

@@ -2,5 +2,5 @@
 
 namespace ClassLibrary1
 {
-    public delegate int MyDelegateType(int a, int b);
+    public delegate void MyDelegateType(double a, double b);
 }

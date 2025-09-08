@@ -5,11 +5,18 @@ namespace ClassLibrary1
 
     public class Sample
     {
-        public int Add(int a, int b)
+        public void Add(double a, double b)
         {
-            int c = a + b;
-            return c;
+            double c = a + b;
+            Console.WriteLine("Addition is: " + c);
         }
+
+        public void Multiply(double a, double b)
+        {
+            double c = a * b;
+            Console.WriteLine("Multiplication is: " + c);
+        }
+
     }
 
 }
