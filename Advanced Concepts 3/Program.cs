@@ -7,15 +7,13 @@ namespace Advanced_Concepts_3
     {
         static void Main()
         {
-            MarksCalculation.CalculationHelper ch = new MarksCalculation.CalculationHelper();
+            Sample s = new Sample();
 
-            Console.WriteLine(ch.Multiply(10, 5));
+            MyDelegateType myDelegate;
 
-            MarksCalculation mc = new MarksCalculation();
-            Student s = new Student() { SecuredMarks = 35, MaxMarks = 50 };
+            myDelegate = new MyDelegateType(s.Add);
 
-            mc.CalculatePercentage(s);
-            Console.WriteLine(s.Percentage);
+            Console.WriteLine(myDelegate.Invoke(30, 40));
 
             Console.ReadKey();
         }
