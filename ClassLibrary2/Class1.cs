@@ -1,29 +1,30 @@
-﻿namespace ClassLibrary1
+﻿using System;
+
+namespace ClassLibrary1
 {
-    public class Student
-    {
-        public double SecuredMarks;
-        public double MaxMarks;
-        public double Percentage;
-    }
 
-    public class MarksCalculation
+public class Sample : IDisposable
     {
-        public void CalculatePercentage(Student s)
+        public Sample()
         {
-            CalculationHelper ch = new CalculationHelper();
-            s.Percentage = ch.Multiply(s.SecuredMarks / s.MaxMarks, 100);
+            Console.WriteLine("Database connected.");
         }
 
-        public class CalculationHelper
+        public void DisplayDataFromDatabase()
         {
-            public double Multiply(double n1, double n2)
-            {
-                return n1 * n2;
-            }
-
+            Console.WriteLine("Reading data from database.");
         }
 
+        //Using dispose now instead of destructor
+        //~Sample()
+        //{
+        //    Console.WriteLine("File is closed");
+        //}
+
+        public void Dispose()
+        {
+            Console.WriteLine("Database disconnected.");
+        }
     }
 
 }
