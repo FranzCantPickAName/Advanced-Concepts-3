@@ -8,13 +8,25 @@ namespace Advanced_Concepts_3
         static void Main()
         {
 
-            double[] a = new double[] { 10, 20, 30, 40, 50, 60, 70, 80, 90, 100 };
+            int[] a = new int[] { 10, 20, 30, 40, 50, 60 };
 
-            int n = Array.BinarySearch(a, 30);
-            Console.WriteLine("30 is found at index " + n);
+            Array.Clear(a, 2, 3);
 
-            int n2 = Array.BinarySearch(a, 100);
-            Console.WriteLine("100 is found at index " + n2);
+            foreach (var item in a)
+            {
+                Console.WriteLine(item);
+            }
+
+            Console.WriteLine();
+
+            int[] b = new int[] { 10, 20, 30 };
+
+            Array.Resize(ref b, 2);
+
+            foreach (var item in b)
+            {
+                Console.WriteLine(item);
+            }
 
             Console.ReadKey();
 
