@@ -7,12 +7,18 @@ namespace EventsSample
     {
         static void Main()
         {
-            Subscriber subscriber = new Subscriber();
+            //Not necessary with anonymous method
+            //Subscriber subscriber = new Subscriber();
 
             Publisher publisher = new Publisher();
 
-            publisher.myEvent += subscriber.Add;
-            publisher.myEvent += subscriber.Multiply;
+            //publisher.myEvent += subscriber.Add;
+            //publisher.myEvent += subscriber.Multiply;
+            publisher.myEvent += delegate (int a, int b)
+            {
+                int c = a + b;
+                Console.WriteLine(c);
+            };
 
             publisher.RaiseEvent(10, 20);
             publisher.RaiseEvent(5, 80);
