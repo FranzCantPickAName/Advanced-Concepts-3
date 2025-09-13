@@ -3,11 +3,14 @@
 namespace ClassLibrary1
 {
 
-    public delegate int MyDelegateType(int a, int b);
+    //public delegate int MyDelegateType(int a, int b);
     public class Publisher
     {
-        
-        public event MyDelegateType myEvent;
+
+        //public event MyDelegateType myEvent;
+
+        //Event func:
+        public event Func<int, int, int> myEvent;
 
         public int RaiseEvent(int a, int b)
         {
