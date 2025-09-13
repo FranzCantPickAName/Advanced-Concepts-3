@@ -8,9 +8,9 @@ namespace Advanced_Concepts_3
         static void Main()
         {
 
-            int[] a = new int[] { 10, 20, 30, 40, 50, 60 };
+            int[] a = new int[] { 67, 12, 99, 4, 500, 125 };
 
-            Array.Clear(a, 2, 3);
+            Array.Sort(a);
 
             foreach (var item in a)
             {
@@ -19,11 +19,9 @@ namespace Advanced_Concepts_3
 
             Console.WriteLine();
 
-            int[] b = new int[] { 10, 20, 30 };
+            Array.Reverse(a);
 
-            Array.Resize(ref b, 2);
-
-            foreach (var item in b)
+            foreach (var item in a)
             {
                 Console.WriteLine(item);
             }
