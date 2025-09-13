@@ -7,20 +7,28 @@ namespace EventsSample
     {
         static void Main()
         {
+            Program p = new Program();
+            p.DoWork();
+            Console.ReadKey();
+        }
+
+        public void DoWork()
+        {
 
             Publisher publisher = new Publisher();
 
-            publisher.myEvent += (a) =>
+            publisher.myEvent += (sender, e) =>
             {
-                return a >= 0;
+                int c = e.a + e.b;
+                Console.WriteLine(c);
             };
 
-            Console.WriteLine(publisher.RaiseEvent(10));
-            Console.WriteLine(publisher.RaiseEvent(-5));
-            Console.WriteLine(publisher.RaiseEvent(-14));
+            publisher.RaiseEvent(this, 10, 50);
+            publisher.RaiseEvent(this, -5, 30);
+            publisher.RaiseEvent(this, 14, 10);
 
 
-            Console.ReadKey();
+            
         }
             
             
