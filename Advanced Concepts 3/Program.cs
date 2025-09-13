@@ -10,15 +10,14 @@ namespace EventsSample
 
             Publisher publisher = new Publisher();
 
-            publisher.myEvent += (a, b) =>
+            publisher.myEvent += (a) =>
             {
-                int c = a + b;
-                Console.WriteLine(c);
+                return a >= 0;
             };
 
-            publisher.RaiseEvent(10, 20);
-            publisher.RaiseEvent(5, 80);
-            publisher.RaiseEvent(14, 22);
+            Console.WriteLine(publisher.RaiseEvent(10));
+            Console.WriteLine(publisher.RaiseEvent(-5));
+            Console.WriteLine(publisher.RaiseEvent(-14));
 
 
             Console.ReadKey();

@@ -6,15 +6,19 @@ namespace ClassLibrary1
     public class Publisher
     {
 
-        //Action:
-        public event Action<int, int> myEvent;
+        public event Predicate<int> myEvent;
 
-        public void RaiseEvent(int a, int b)
+        public bool RaiseEvent(int a)
         {
 
             if (this.myEvent != null)
             {
-                this.myEvent(a, b);
+                bool result = this.myEvent(a);
+                return result;
+            }
+            else
+            {
+                return false;
             }
 
         }
