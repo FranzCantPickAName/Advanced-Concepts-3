@@ -1,35 +1,31 @@
 ﻿using ClassLibrary1;
 using System;
+using System.Linq.Expressions;
 
 namespace EventsSample
 {
+    class Student
+    {
+        public int StudentID { get; set; }
+        public string StudentName { get; set; }
+        public int Age { get; set; }
+    }
     class Program
     {
         static void Main()
         {
-            Program p = new Program();
-            p.DoWork();
+            Student s = new Student() { StudentID = 101, StudentName = "Scott", Age = 15 };
+
+            Expression<Func<Student, bool>> expression = st => st.Age > 12 && st.Age < 20;
+
+            Func<Student, bool> myDelegate = expression.Compile();
+
+            bool result = myDelegate.Invoke(s);
+            Console.WriteLine(result);
+
             Console.ReadKey();
         }
 
-        public void DoWork()
-        {
-
-            Publisher publisher = new Publisher();
-
-            publisher.myEvent += (sender, e) =>
-            {
-                int c = e.a + e.b;
-                Console.WriteLine(c);
-            };
-
-            publisher.RaiseEvent(this, 10, 50);
-            publisher.RaiseEvent(this, -5, 30);
-            publisher.RaiseEvent(this, 14, 10);
-
-
-            
-        }
             
             
             }
