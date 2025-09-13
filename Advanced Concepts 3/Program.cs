@@ -1,23 +1,27 @@
 ﻿using ClassLibrary1;
 using System;
 
-namespace Advanced_Concepts_3
+namespace EventsSample
 {
-    internal class Program
+    class Program
     {
         static void Main()
         {
-            Sample s = new Sample();
+            Subscriber subscriber = new Subscriber();
 
-            MyDelegateType myDelegate;
+            Publisher publisher = new Publisher();
 
-            myDelegate = s.Add;
+            publisher.myEvent += subscriber.Add;
+            publisher.myEvent += subscriber.Multiply;
 
-            myDelegate += s.Multiply;
+            publisher.RaiseEvent(10, 20);
+            publisher.RaiseEvent(5, 80);
+            publisher.RaiseEvent(14, 22);
 
-            myDelegate.Invoke(40, 10);
 
             Console.ReadKey();
         }
-    }
+            
+            
+            }
 }
