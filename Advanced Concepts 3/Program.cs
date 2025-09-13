@@ -4,29 +4,29 @@ using System.Linq.Expressions;
 
 namespace EventsSample
 {
-    class Student
-    {
-        public int StudentID { get; set; }
-        public string StudentName { get; set; }
-        public int Age { get; set; }
-    }
     class Program
     {
         static void Main()
         {
-            Student s = new Student() { StudentID = 101, StudentName = "Scott", Age = 15 };
+            SmsService smsService = new SmsService();
 
-            Expression<Func<Student, bool>> expression = st => st.Age > 12 && st.Age < 20;
+            MobileApp mobile = new MobileApp();
+            WebApp web = new WebApp();
+            ReportSystem report = new ReportSystem();
 
-            Func<Student, bool> myDelegate = expression.Compile();
+            smsService.SmsReceived += mobile.OnSmsReceived;
+            smsService.SmsReceived += web.OnSmsReceived;
+            smsService.SmsReceived += report.OnSmsReceived;
 
-            bool result = myDelegate.Invoke(s);
-            Console.WriteLine(result);
+            smsService.ReceiveSms("09120000000", "Sup bro");
+            Console.WriteLine();
+            smsService.ReceiveSms("09350000000", "Don't forget 10 o'clock meeting");
 
             Console.ReadKey();
         }
 
             
             
-            }
+    }
+
 }
