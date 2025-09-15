@@ -8,23 +8,18 @@ namespace Advanced_Concepts_3
     {
         static void Main()
         {
-            //Console.WriteLine("First list: ");
-            List<double> myNumbers = new List<double>() { 170, 150, 445, 120, 10, 4, 661 };
 
-            myNumbers.Sort();
+            List<string> myFriends = new List<string>() { "Scott", "Allen", "James", "Jones" };
 
-            foreach (double number in myNumbers)
+            string[] myFriendsArray = myFriends.ToArray();
+
+            foreach (string friend in myFriendsArray)
             {
-                Console.WriteLine(number);
+                Console.WriteLine(friend);
             }
-            Console.WriteLine();
 
-            myNumbers.Reverse();
-
-            foreach (double value in myNumbers)
-            {
-                Console.WriteLine(value);
-            }
+            Console.WriteLine("\nForEach method: ");
+            myFriends.ForEach(friend => Console.WriteLine(friend));
 
             Console.ReadKey();
         }
