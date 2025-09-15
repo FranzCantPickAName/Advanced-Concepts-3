@@ -8,22 +8,16 @@ namespace Advanced_Concepts_3
         static void Main()
         {
 
-            int[][] a = new int[5][];
-
-            a[0] = new int[3] { 10, 20, 30 };
-            a[1] = new int[5] { 40, 50, 60, 70, 80 };
-            a[2] = new int[2] { 90, 100 };
-            a[3] = new int[4] { 110, 120, 130, 140 };
-            a[4] = new int[8] { 150, 160, 170, 180, 190, 200, 210, 220 };
-
-            for (int i = 0; i < 5; i++)
+            Employee[] employees = new Employee[]             
             {
-                for (int j = 0; j < a[i].Length; j++)
-                {
-                    Console.Write(a[i][j]);
-                    Console.Write(" ");
-                }
-                Console.WriteLine();
+                new Employee() { EmpID = 101, EmpName = "Scott"},
+                new Employee() { EmpID = 102, EmpName = "Smith" },
+                new Employee() { EmpID = 103, EmpName = "John" },
+            };
+
+            foreach (Employee employee in employees)
+            {
+                Console.WriteLine(employee.EmpID + ", " + employee.EmpName);
             }
 
             Console.ReadKey();
