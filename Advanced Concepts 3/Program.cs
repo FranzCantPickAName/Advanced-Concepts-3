@@ -8,24 +8,32 @@ namespace Advanced_Concepts_3
     {
         static void Main()
         {
-            List<int> myList = new List<int>(10) { 10, 20, 30, 40, 50 };
+            Console.WriteLine("First list: ");
+            List<int> myList = new List<int>(10) { 10, 20, 30, 40, 50, 40 };
 
-            //myList.Remove(30);
-            //myList.RemoveAt(2);
-            //myList.RemoveRange(1,2);
-            //myList.RemoveAll(n => n >= 30);
-            myList.Clear();
+            int n = myList.IndexOf(40);
+            Console.WriteLine("40 found at index " + n);
 
-            //List<int> otherList = new List<int>() { 50, 60, 70 };
-
-            //myList.InsertRange(2, otherList);
-
-            Console.WriteLine("Using foreach loop: ");
-            foreach (int item in myList)
+            int n2 = myList.IndexOf(60);
+            if (n2 >= 0)
             {
-                Console.WriteLine(item);
+                Console.WriteLine("60 found at index " + n2);
+            }
+            else
+            {
+                Console.WriteLine("60 not found");
             }
 
+            int n3 = myList.IndexOf(40, n + 1);
+            Console.WriteLine("Second occurence of 40 is at index " + n3);
+
+            Console.WriteLine("\nSecond list: ");
+            List<int> myList2 = new List<int>(10) { 10, 20, 30, 40, 50, 60, 70, 80, 90, 100 };
+            int n4 = myList2.BinarySearch(80);
+            Console.WriteLine("Binary search: 80 found at index " + n4);
+
+            bool b = myList2.Contains(110);
+            Console.WriteLine("110 is found: " + b);
 
             Console.ReadKey();
         }
