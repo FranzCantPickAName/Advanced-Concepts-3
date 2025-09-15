@@ -10,11 +10,11 @@ namespace Advanced_Concepts_3
         {
             List<int> myList = new List<int>(10) { 10, 20, 30 };
 
-            myList.Add(40);
+            myList.Insert(1, 100);
 
             List<int> otherList = new List<int>() { 50, 60, 70 };
 
-            myList.AddRange(otherList);
+            myList.InsertRange(2, otherList);
 
             Console.WriteLine("Using foreach loop: ");
             foreach (int item in myList)
