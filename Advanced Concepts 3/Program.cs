@@ -10,36 +10,33 @@ namespace Advanced_Concepts_3
         static void Main()
         {
 
-            List<int> marks = new List<int>() { 40, 95, 24, 70, 16, 81 };
+            List<int> intCollection = new List<int>() { 1, 8, 2, 7 };
 
-            bool b = marks.Exists(m => m < 35);
+            List<string> strCollection = intCollection.ConvertAll<string>((n) =>
 
-            if (b)
             {
-                Console.WriteLine("Student has failed one or more subjects.");
+                string word;
+                switch (n)
+                {
+                    case 1: word = "One"; break;
+                    case 2: word = "Two"; break;
+                    case 3: word = "Three"; break;
+                    case 4: word = "Four"; break;
+                    case 5: word = "Five"; break;
+                    case 6: word = "Six"; break;
+                    case 7: word = "Seven"; break;
+                    case 8: word = "Eight"; break;
+                    case 9: word = "Nine"; break;
+                    default: word = ""; break;
+                }
+                return word;
+
             }
-            else
+            );
+
+            foreach (string str in strCollection)
             {
-                Console.WriteLine("Student has passed all subjects.");
-            }
-
-            int firstFailedMark = marks.Find(m => m < 35);
-            Console.WriteLine("The first failed mark is: " + firstFailedMark);
-
-            int firstFailedMarkIndex = marks.FindIndex(m => m < 35);
-            Console.WriteLine("The first failed mark is at index: " + firstFailedMarkIndex);
-
-            int lastFailedMark = marks.FindLast(m => m < 35);
-            Console.WriteLine("The last failed mark is: " + lastFailedMark);
-
-            int lastFailedMarkIndex = marks.FindLastIndex(m => m < 35);
-            Console.WriteLine("The last failed mark is at index: " + lastFailedMarkIndex);
-
-            List<int> allFailedMarks = marks.FindAll(m => m < 35);
-            Console.WriteLine("\nFailed marks: ");
-            foreach (int mark in allFailedMarks)
-            {
-                Console.WriteLine(mark);
+                Console.WriteLine(str);
             }
 
             Console.ReadKey();
