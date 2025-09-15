@@ -10,17 +10,18 @@ namespace Advanced_Concepts_3
         {
             List<int> myList = new List<int>(10) { 10, 20, 30 };
 
+            myList.Add(40);
+
+            List<int> otherList = new List<int>() { 50, 60, 70 };
+
+            myList.AddRange(otherList);
+
             Console.WriteLine("Using foreach loop: ");
             foreach (int item in myList)
             {
                 Console.WriteLine(item);
             }
 
-            Console.WriteLine("Using for loop: ");
-            for (int i = 0; i < myList.Count; i++)
-            {
-                Console.WriteLine(myList[i]);
-            }
 
             Console.ReadKey();
         }
