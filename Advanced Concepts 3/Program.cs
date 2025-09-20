@@ -11,26 +11,38 @@ namespace Advanced_Concepts_3
     {
         static void Main()
         {
-            HashSet<string> messages = new HashSet<string>()
+            HashSet<string> employees2021 = new HashSet<string>()
             {
-                "Good Morning", "How Are You", "Have a good day"
+                "Amir", "Soheil", "Saman"
+            };
+            HashSet<string> newEmployees2022 = new HashSet<string>()
+            {
+                "John", "Scott", "Smith", "Steve"
             };
 
-            messages.Add("Good Luck");
-            messages.Remove("Have a good day");
-            messages.RemoveWhere(m => m.EndsWith("You"));
+            employees2021.UnionWith(newEmployees2022);
 
-            bool b = messages.Contains("Good Morning");
-            Console.WriteLine("Contains 'Good Morning' : " + b);
-
-            Console.WriteLine("\nCount: " + messages.Count);
-
-            foreach (string message in messages)
+            foreach (string item in employees2021)
             {
-                Console.WriteLine(message);
+                Console.WriteLine(item);
             }
 
-                Console.ReadKey();
+            Console.WriteLine();
+
+            HashSet<string> employees2021_I = new HashSet<string>()
+            {
+                "Amir", "Soheil", "Saman"
+            };
+            HashSet<string> newEmployees2022_I = new HashSet<string>()
+            {
+                "John", "Amir", "Soheil", "Scott", "Smith", "Steve"
+            };
+
+            employees2021_I.IntersectWith(newEmployees2022_I);
+            foreach (string item in employees2021_I)
+                { Console.WriteLine(item); }
+
+            Console.ReadKey();
         }
     }
 }
