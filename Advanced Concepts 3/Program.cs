@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 
 namespace Advanced_Concepts_3
 {
@@ -10,34 +11,42 @@ namespace Advanced_Concepts_3
         static void Main()
         {
 
-            List<int> intCollection = new List<int>() { 1, 8, 2, 7 };
-
-            List<string> strCollection = intCollection.ConvertAll<string>((n) =>
-
+            Dictionary<int, string> employees = new Dictionary<int, string>()
             {
-                string word;
-                switch (n)
-                {
-                    case 1: word = "One"; break;
-                    case 2: word = "Two"; break;
-                    case 3: word = "Three"; break;
-                    case 4: word = "Four"; break;
-                    case 5: word = "Five"; break;
-                    case 6: word = "Six"; break;
-                    case 7: word = "Seven"; break;
-                    case 8: word = "Eight"; break;
-                    case 9: word = "Nine"; break;
-                    default: word = ""; break;
-                }
-                return word;
+                { 101, "Scott" },
+                { 102, "Smith" },
+                { 103, "Allen" }
+            };
 
-            }
-            );
+            employees.Add(104, "Mark");
+            //Keys in a dictionary must be unique
+            //employees.Add(104, "Steve");
 
-            foreach (string str in strCollection)
+            employees.Remove(102);
+
+            string s = employees[101];
+            Console.WriteLine("\nValue at 101: " + s);
+
+            foreach (KeyValuePair<int, string> item in employees)
             {
-                Console.WriteLine(str);
+                Console.WriteLine(item.Key + ", " + item.Value);
             }
+
+            Dictionary<int, string>.KeyCollection keys = employees.Keys;
+
+            Console.WriteLine("\nKeys: ");
+            foreach (int item in keys)
+            {
+                Console.WriteLine(item);
+            }
+
+            bool a = employees.ContainsKey(103);
+            Console.WriteLine("ContainsKey: " + a);
+
+            bool b = employees.ContainsValue("Scott");
+            Console.WriteLine("ContainsValue: " + b);
+
+            //employees.Clear();
 
             Console.ReadKey();
         }
