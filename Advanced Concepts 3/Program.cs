@@ -11,24 +11,30 @@ namespace Advanced_Concepts_3
     {
         static void Main()
         {
-            Stack<Student> marks = new Stack<Student>();
+            Queue<string> queue = new Queue<string>();
 
-            marks.Push(new Student() { Marks = 45 });
-            marks.Push(new Student() { Marks = 61 });
-            marks.Push(new Student() { Marks = 80 });
+            queue.Enqueue("Task 3");
+            queue.Enqueue("Task 5");
+            queue.Enqueue("Task 1");
+            queue.Enqueue("Task 4");
+            queue.Enqueue("Task 2");
 
-            Student stuPop = marks.Pop();
-            Console.WriteLine("Pop: " + stuPop.Marks);
-
-            Student stuPeek = marks.Peek();
-            Console.WriteLine("Peek: " + stuPeek.Marks);
-
-            int r = 1;
-            foreach (Student item in marks)
+            foreach (string item in queue)
             {
-                item.Rank = r;
-                Console.WriteLine(item.Marks + ", " + item.Rank);
-                r++;
+                Console.WriteLine(item);
+            }
+
+            string dequeue1 = queue.Dequeue();
+            Console.WriteLine("Dequeue: " + dequeue1);
+            string dequeue2 = queue.Dequeue();
+            Console.WriteLine("Dequeue: " + dequeue2);
+
+            string peek = queue.Peek();
+            Console.WriteLine("Peek: " + peek);
+
+            foreach (string item in queue)
+            {
+                Console.WriteLine(item);
             }
 
             Console.ReadKey();
