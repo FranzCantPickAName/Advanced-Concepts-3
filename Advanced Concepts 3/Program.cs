@@ -1,5 +1,6 @@
 ﻿using ClassLibrary1;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -11,56 +12,65 @@ namespace Advanced_Concepts_3
         static void Main()
         {
 
-            SortedList<int, string> employees = new SortedList<int, string>()
+            Hashtable employees = new Hashtable()
             {
                 { 102, "Smith" },
                 { 105, "James" },
                 { 103, "Allen" },
                 { 101, "Scott" },
-                { 104, "Jones" }
+                { 104, "Jones" },
+                { "hello", 10.934 }
             };
 
             employees.Add(100, "Anna");
 
-            employees.Remove(100);
+            employees.Remove(103);
 
-            foreach (KeyValuePair<int, string> item in employees)
+            foreach (DictionaryEntry item in employees)
             {
                 Console.WriteLine(item.Key + ", " + item.Value);
             }
 
-            string s = employees[105];
-            Console.WriteLine("\nValue at 105: " + s);
-
-            Console.WriteLine("\nKeys: ");
-            foreach (int item in employees.Keys)
+            if (employees[105] is string)
             {
-                Console.WriteLine(item);
+                string value = Convert.ToString(employees[105]);
+                Console.WriteLine(value);
+            }
+            else if (employees[105] is double)
+            {
+                double value = Convert.ToDouble(employees[105]);
+                Console.WriteLine(value);
             }
 
-            Console.WriteLine("\nValues: ");
-            foreach (string item in employees.Values)
-            {
-                Console.WriteLine(item);
-            }
+                Console.WriteLine("\nKeys: ");
+                foreach (var item in employees.Keys)
+                {
+                    Console.WriteLine(item);
+                }
 
-            Console.WriteLine();
+                Console.WriteLine("\nValues: ");
+                foreach (var item in employees.Values)
+                {
+                    Console.WriteLine(item);
+                }
 
-            bool a = employees.ContainsKey(105);
-            Console.WriteLine("ContainsKey 105: " + a);
+                Console.WriteLine();
 
-            bool b = employees.ContainsValue("Scott");
-            Console.WriteLine("ContainsValue Scott: " + b);
+                bool a = employees.ContainsKey(105);
+                Console.WriteLine("ContainsKey 105: " + a);
 
-            int keyIndex = employees.IndexOfKey(101);
-            Console.WriteLine("\nIndex of 101: " + keyIndex);
+                bool b = employees.ContainsValue("Scott");
+                Console.WriteLine("ContainsValue Scott: " + b);
 
-            int valueIndex = employees.IndexOfValue("Allen");
-            Console.WriteLine("\nIndex of Allen: " + valueIndex);
+                //int keyIndex = employees.IndexOfKey(101);
+                //Console.WriteLine("\nIndex of 101: " + keyIndex);
 
-            ////employees.Clear();
+                //int valueIndex = employees.IndexOfValue("Allen");
+                //Console.WriteLine("\nIndex of Allen: " + valueIndex);
 
-            Console.ReadKey();
+                ////employees.Clear();
+
+                Console.ReadKey();
         }
     }
 }
