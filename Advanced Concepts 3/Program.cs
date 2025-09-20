@@ -11,25 +11,24 @@ namespace Advanced_Concepts_3
     {
         static void Main()
         {
-            ArrayList arrayList = new ArrayList() { 100, 'A' } ;
+            Stack<Student> marks = new Stack<Student>();
 
-            Sample sample = new Sample() ;
+            marks.Push(new Student() { Marks = 45 });
+            marks.Push(new Student() { Marks = 61 });
+            marks.Push(new Student() { Marks = 80 });
 
-            arrayList.Add(sample.GetNumber());
-            arrayList.Add(sample.GetAnotherNumber());
-            arrayList.Add(sample.GetMessage());
-            arrayList.Add(sample.GetEmployee());
+            Student stuPop = marks.Pop();
+            Console.WriteLine("Pop: " + stuPop.Marks);
 
-            foreach (var item in arrayList)
+            Student stuPeek = marks.Peek();
+            Console.WriteLine("Peek: " + stuPeek.Marks);
+
+            int r = 1;
+            foreach (Student item in marks)
             {
-                if (item is Employee emp)
-                {
-                    Console.WriteLine(emp.EmployeeName);
-                }
-                else
-                {
-                    Console.WriteLine(item);
-                }
+                item.Rank = r;
+                Console.WriteLine(item.Marks + ", " + item.Rank);
+                r++;
             }
 
             Console.ReadKey();
