@@ -11,36 +11,26 @@ namespace Advanced_Concepts_3
     {
         static void Main()
         {
-            HashSet<string> employees2021 = new HashSet<string>()
-            {
-                "Amir", "Soheil", "Saman"
-            };
-            HashSet<string> newEmployees2022 = new HashSet<string>()
-            {
-                "John", "Scott", "Smith", "Steve"
-            };
+            ArrayList arrayList = new ArrayList() { 100, 'A' } ;
 
-            employees2021.UnionWith(newEmployees2022);
+            Sample sample = new Sample() ;
 
-            foreach (string item in employees2021)
+            arrayList.Add(sample.GetNumber());
+            arrayList.Add(sample.GetAnotherNumber());
+            arrayList.Add(sample.GetMessage());
+            arrayList.Add(sample.GetEmployee());
+
+            foreach (var item in arrayList)
             {
-                Console.WriteLine(item);
+                if (item is Employee emp)
+                {
+                    Console.WriteLine(emp.EmployeeName);
+                }
+                else
+                {
+                    Console.WriteLine(item);
+                }
             }
-
-            Console.WriteLine();
-
-            HashSet<string> employees2021_I = new HashSet<string>()
-            {
-                "Amir", "Soheil", "Saman"
-            };
-            HashSet<string> newEmployees2022_I = new HashSet<string>()
-            {
-                "John", "Amir", "Soheil", "Scott", "Smith", "Steve"
-            };
-
-            employees2021_I.IntersectWith(newEmployees2022_I);
-            foreach (string item in employees2021_I)
-                { Console.WriteLine(item); }
 
             Console.ReadKey();
         }
