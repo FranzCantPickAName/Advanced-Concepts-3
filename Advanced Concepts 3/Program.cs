@@ -11,42 +11,54 @@ namespace Advanced_Concepts_3
         static void Main()
         {
 
-            Dictionary<int, string> employees = new Dictionary<int, string>()
+            SortedList<int, string> employees = new SortedList<int, string>()
             {
-                { 101, "Scott" },
                 { 102, "Smith" },
-                { 103, "Allen" }
+                { 105, "James" },
+                { 103, "Allen" },
+                { 101, "Scott" },
+                { 104, "Jones" }
             };
 
-            employees.Add(104, "Mark");
-            //Keys in a dictionary must be unique
-            //employees.Add(104, "Steve");
+            employees.Add(100, "Anna");
 
-            employees.Remove(102);
-
-            string s = employees[101];
-            Console.WriteLine("\nValue at 101: " + s);
+            employees.Remove(100);
 
             foreach (KeyValuePair<int, string> item in employees)
             {
                 Console.WriteLine(item.Key + ", " + item.Value);
             }
 
-            Dictionary<int, string>.KeyCollection keys = employees.Keys;
+            string s = employees[105];
+            Console.WriteLine("\nValue at 105: " + s);
 
             Console.WriteLine("\nKeys: ");
-            foreach (int item in keys)
+            foreach (int item in employees.Keys)
             {
                 Console.WriteLine(item);
             }
 
-            bool a = employees.ContainsKey(103);
-            Console.WriteLine("ContainsKey: " + a);
+            Console.WriteLine("\nValues: ");
+            foreach (string item in employees.Values)
+            {
+                Console.WriteLine(item);
+            }
+
+            Console.WriteLine();
+
+            bool a = employees.ContainsKey(105);
+            Console.WriteLine("ContainsKey 105: " + a);
 
             bool b = employees.ContainsValue("Scott");
-            Console.WriteLine("ContainsValue: " + b);
+            Console.WriteLine("ContainsValue Scott: " + b);
 
-            //employees.Clear();
+            int keyIndex = employees.IndexOfKey(101);
+            Console.WriteLine("\nIndex of 101: " + keyIndex);
+
+            int valueIndex = employees.IndexOfValue("Allen");
+            Console.WriteLine("\nIndex of Allen: " + valueIndex);
+
+            ////employees.Clear();
 
             Console.ReadKey();
         }
