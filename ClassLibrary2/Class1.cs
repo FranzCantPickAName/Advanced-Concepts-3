@@ -1,14 +1,17 @@
-﻿namespace ClassLibrary1
+﻿using System;
+
+namespace ClassLibrary1
 {
 
-    public class Student
+    /// <summary>
+    /// Represents a product in the ECommerce application
+    /// </summary>
+    public class Product
     {
-        public int Marks
-        {
-            get; set;
-        }
-        public int Rank
-            { get; set; }
+        public int ProductID { get; set; }
+        public string ProductName { get; set; }
+        public double ProductPrice { get; set; }
+        public DateTime DateOfManufacture {  get; set; }
 
 
     }

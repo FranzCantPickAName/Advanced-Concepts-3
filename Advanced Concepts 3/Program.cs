@@ -11,30 +11,35 @@ namespace Advanced_Concepts_3
     {
         static void Main()
         {
-            Queue<string> queue = new Queue<string>();
+            List<Product> products = new List<Product>();
 
-            queue.Enqueue("Task 3");
-            queue.Enqueue("Task 5");
-            queue.Enqueue("Task 1");
-            queue.Enqueue("Task 4");
-            queue.Enqueue("Task 2");
-
-            foreach (string item in queue)
+            string choice;
+            do
             {
-                Console.WriteLine(item);
+                Console.Write("Enter Product ID: ");
+                int pID = int.Parse(Console.ReadLine());
+                Console.Write("Enter Product Name: ");
+                string pName = Console.ReadLine();
+                Console.Write("Enter Product Price: ");
+                double unitPrice = double.Parse(Console.ReadLine());
+                Console.Write("Enter Date of Manufacture (YYYY-MM-DD) : ");
+                DateTime dateOfManufacture = DateTime.Parse(Console.ReadLine());
+
+                Product product = new Product()
+                { ProductID = pID, ProductName = pName, ProductPrice = unitPrice, DateOfManufacture = dateOfManufacture };
+
+                products.Add(product);
+
+                Console.WriteLine("Product Added.\n");
+                Console.WriteLine("Do you want to continue to next product? (Yes/No)");
+                choice = Console.ReadLine();
             }
+            while (choice != "No" && choice != "no" && choice != "n" && choice != "N");
 
-            string dequeue1 = queue.Dequeue();
-            Console.WriteLine("Dequeue: " + dequeue1);
-            string dequeue2 = queue.Dequeue();
-            Console.WriteLine("Dequeue: " + dequeue2);
-
-            string peek = queue.Peek();
-            Console.WriteLine("Peek: " + peek);
-
-            foreach (string item in queue)
+            Console.WriteLine("\nProducts:");
+            foreach (Product item in products)
             {
-                Console.WriteLine(item);
+                Console.WriteLine(item.ProductID + ", " + item.ProductName + ", " + item.ProductPrice + ", " + item.DateOfManufacture.ToShortDateString());
             }
 
             Console.ReadKey();
