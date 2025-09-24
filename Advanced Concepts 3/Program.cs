@@ -26,6 +26,30 @@ namespace Advanced_Concepts_3
                 Console.WriteLine(customer.CustomerID + ", " + customer.CustomerName + ", " + customer.Email + ", " + customer.CustomerType);
             }
 
+            Console.WriteLine("Contains: " + customersList.Contains(new_cust));
+            Console.WriteLine(customersList.Count + " customers found.");
+
+            customersList.Remove(new_cust);
+            foreach (Customer customer in customersList)
+            {
+                Console.WriteLine(customer.CustomerID + ", " + customer.CustomerName + ", " + customer.Email + ", " + customer.CustomerType);
+            }
+
+            Customer matchingCustomer = customersList.Find(cust => cust.CustomerID == "A101");
+            if (matchingCustomer != null)
+            {
+                Console.WriteLine(matchingCustomer.CustomerID + ", " + matchingCustomer.CustomerName);
+            }
+
+            List<Customer> vipcust = customersList.FindAll(cust => cust.CustomerType == TypeOfCustomer.VIPCustomer);
+            Console.WriteLine("\nVIP customers: ");
+            foreach (Customer customer in vipcust)
+            {
+                Console.WriteLine(customer.CustomerID + ", " + customer.CustomerName + ", " + customer.Email + ", " + customer.CustomerType);
+            }
+
+            customersList.Clear();
+
             Console.ReadKey();
         }
     }

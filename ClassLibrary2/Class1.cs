@@ -47,10 +47,14 @@ namespace ClassLibrary1
     //}
 
     //custom collection class
-    public class CustomersList : IEnumerable<Customer>
+    public class CustomersList : ICollection<Customer>
     {
         //private collection as a field
         private List<Customer> customers = new List<Customer>();
+
+        public int Count => customers.Count;
+
+        public bool IsReadOnly => false;
 
         //implementing IEnumerable.GetEnumerator()
         IEnumerator IEnumerable.GetEnumerator()
@@ -79,6 +83,36 @@ namespace ClassLibrary1
             {
                 Console.WriteLine("Invalid Customer ID");
             }
+        }
+
+        public void Clear()
+        {
+            customers.Clear();
+        }
+
+        public bool Contains(Customer item)
+        {
+            return customers.Contains(item);
+        }
+
+        public void CopyTo(Customer[] array, int arrayIndex)
+        {
+            customers.CopyTo(array, arrayIndex);
+        }
+
+        public bool Remove(Customer item)
+        {
+            return customers.Remove(item);
+        }
+
+        public Customer Find(Predicate<Customer> match)
+        {
+            return customers.Find(match);
+        }
+
+        public List<Customer> FindAll(Predicate<Customer> match)
+        {
+            return customers.FindAll(match);
         }
     }
 
