@@ -26,6 +26,7 @@ namespace Advanced_Concepts_3
                 Console.WriteLine(customer.CustomerID + ", " + customer.CustomerName + ", " + customer.Email + ", " + customer.CustomerType);
             }
 
+            Console.WriteLine();
             Console.WriteLine("Contains: " + customersList.Contains(new_cust));
             Console.WriteLine(customersList.Count + " customers found.");
 
@@ -44,6 +45,20 @@ namespace Advanced_Concepts_3
             List<Customer> vipcust = customersList.FindAll(cust => cust.CustomerType == TypeOfCustomer.VIPCustomer);
             Console.WriteLine("\nVIP customers: ");
             foreach (Customer customer in vipcust)
+            {
+                Console.WriteLine(customer.CustomerID + ", " + customer.CustomerName + ", " + customer.Email + ", " + customer.CustomerType);
+            }
+
+            //IndexOf
+            Console.WriteLine("IndexOf: " + customersList.IndexOf(new_cust));
+
+            //Insert
+            customersList.Insert(2, new_cust);
+            Console.WriteLine(customersList[2].CustomerID + ", " + customersList[2].CustomerName);
+
+            customersList.RemoveAt(1);
+
+            foreach (Customer customer in customersList)
             {
                 Console.WriteLine(customer.CustomerID + ", " + customer.CustomerName + ", " + customer.Email + ", " + customer.CustomerType);
             }

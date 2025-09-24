@@ -18,36 +18,9 @@ namespace ClassLibrary1
 
     }
 
-    //public class CustomerList : IEnumerable
-    //{
-    //    private List<Customer> customers = new List<Customer>();
-    //    public IEnumerator GetEnumerator()
-    //    {
-    //        for (int i = 0; i < customers.Count; i++)
-    //        {
-    //            yield return customers[i];
-    //        }
-    //    }
-
-    //    public void Add(Customer cust)
-    //    {
-    //        if (cust.CustomerID.StartsWith("A") || cust.CustomerID.StartsWith("a"))
-    //        {
-    //            customers.Add(cust);
-    //        }
-    //        else
-    //        {
-    //            Console.WriteLine("Invalid Customer ID");
-    //        }
-
-    //    }
-
-
-
-    //}
 
     //custom collection class
-    public class CustomersList : ICollection<Customer>
+    public class CustomersList : IList<Customer>
     {
         //private collection as a field
         private List<Customer> customers = new List<Customer>();
@@ -55,6 +28,12 @@ namespace ClassLibrary1
         public int Count => customers.Count;
 
         public bool IsReadOnly => false;
+
+        public Customer this[int index]
+        {
+            get => customers[index];
+            set => customers[index] = value;
+        }
 
         //implementing IEnumerable.GetEnumerator()
         IEnumerator IEnumerable.GetEnumerator()
@@ -113,6 +92,35 @@ namespace ClassLibrary1
         public List<Customer> FindAll(Predicate<Customer> match)
         {
             return customers.FindAll(match);
+        }
+
+        public int IndexOf(Customer item)
+        {
+            return customers.IndexOf(item);
+        }
+
+        public void Insert(int index, Customer item)
+        {
+            if (index < 0)
+            {
+                Console.WriteLine("Invalid index");
+            }
+            else
+            {
+                customers.Insert(index, item);
+            }
+        }
+
+        public void RemoveAt(int index)
+        {
+            if (index < 0)
+            {
+                Console.WriteLine("Invalid index");
+            }
+            else
+            {
+                customers.RemoveAt(index);
+            }
         }
     }
 
