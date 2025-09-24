@@ -11,18 +11,19 @@ namespace Advanced_Concepts_3
     {
         static void Main()
         {
-            IEnumerable<string> messages;
-            messages = new List<string>() { "How are you", "Have a great day", "Thanks for the meeting" };
-
-            Console.WriteLine("IEnumerable:");
-            foreach (string item in messages) Console.WriteLine(item);
-
-            Console.WriteLine("\nIEnumerator:");
-            IEnumerator<string> enumerator = messages.GetEnumerator();
-            enumerator.Reset();
-            while (enumerator.MoveNext())
+            CustomerList customersList = new CustomerList()
             {
-                Console.WriteLine(enumerator.Current);
+                new Customer() { CustomerID = "A101", CustomerName = "James", Email = "james@gmail.com", CustomerType = TypeOfCustomer.RegularCustomer },
+                new Customer() { CustomerID = "A201", CustomerName = "Bob", Email = "bob@gmail.com", CustomerType = TypeOfCustomer.VIPCustomer },
+                new Customer() { CustomerID = "A301", CustomerName = "Alice", Email = "alice@gmail.com", CustomerType = TypeOfCustomer.VIPCustomer }
+            };
+
+            Customer new_cust = new Customer() { CustomerID = "A456", CustomerName = "Jacob", Email = "jacob@gmail.com", CustomerType = TypeOfCustomer.VIPCustomer };
+            customersList.Add(new_cust);
+
+            foreach (Customer customer in customersList)
+            {
+                Console.WriteLine(customer.CustomerID + ", " + customer.CustomerName + ", " + customer.Email + ", " + customer.CustomerType);
             }
 
             Console.ReadKey();
