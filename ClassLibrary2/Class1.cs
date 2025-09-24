@@ -9,13 +9,17 @@ namespace ClassLibrary1
     {
         RegularCustomer, VIPCustomer
     }
-    public class Customer
+    public class Customer : IEquatable<Customer>
     {
         public string CustomerID { get; set; }
         public string CustomerName { get; set; }
         public string Email { get; set; }
         public TypeOfCustomer CustomerType { get; set; }
 
+        public bool Equals(Customer other)
+        {
+            return this.CustomerID == other.CustomerID && this.CustomerName == other.CustomerName && this.Email == other.Email && this.CustomerType == other.CustomerType;
+        }
     }
 
 

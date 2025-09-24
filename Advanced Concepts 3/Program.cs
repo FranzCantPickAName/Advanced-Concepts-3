@@ -18,17 +18,23 @@ namespace Advanced_Concepts_3
                 new Customer() { CustomerID = "A301", CustomerName = "Alice", Email = "alice@gmail.com", CustomerType = TypeOfCustomer.VIPCustomer }
             };
 
-            Customer new_cust = new Customer() { CustomerID = "A456", CustomerName = "Jacob", Email = "jacob@gmail.com", CustomerType = TypeOfCustomer.VIPCustomer };
+            //Add
+            Customer new_cust = new Customer() { CustomerID = "A456", CustomerName = "Jacob", Email = "jacob@example.com", CustomerType = TypeOfCustomer.VIPCustomer };
             customersList.Add(new_cust);
+
+            Customer another_cust = new Customer() { CustomerID = "A456", CustomerName = "Jacobb", Email = "jacob@example.com", CustomerType = TypeOfCustomer.VIPCustomer };
+
+            Console.WriteLine();
+            //Contains
+            Console.WriteLine("Contains: " + customersList.Contains(new_cust));  // True
+            Console.WriteLine("Contains: " + customersList.Contains(another_cust));  // True
+            Console.WriteLine(customersList.Count + " customers found.");
 
             foreach (Customer customer in customersList)
             {
                 Console.WriteLine(customer.CustomerID + ", " + customer.CustomerName + ", " + customer.Email + ", " + customer.CustomerType);
             }
 
-            Console.WriteLine();
-            Console.WriteLine("Contains: " + customersList.Contains(new_cust));
-            Console.WriteLine(customersList.Count + " customers found.");
 
             customersList.Remove(new_cust);
             foreach (Customer customer in customersList)
