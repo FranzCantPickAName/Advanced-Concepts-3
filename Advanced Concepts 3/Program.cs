@@ -11,7 +11,7 @@ namespace Advanced_Concepts_3
     {
         static void Main()
         {
-            CustomerList customersList = new CustomerList()
+            CustomersList customersList = new CustomersList()
             {
                 new Customer() { CustomerID = "A101", CustomerName = "James", Email = "james@gmail.com", CustomerType = TypeOfCustomer.RegularCustomer },
                 new Customer() { CustomerID = "A201", CustomerName = "Bob", Email = "bob@gmail.com", CustomerType = TypeOfCustomer.VIPCustomer },
