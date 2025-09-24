@@ -11,24 +11,35 @@ namespace Advanced_Concepts_3
     {
         static void Main()
         {
-            Student student = new Student();
-            student.RollNo = 1;
-            student.StudentName = "Allen";
-            student.Email = "allen@gmail.com";
+            Employee employee1 = new Employee() { EmployeeID = 1, EmployeeName = "Scott", Email = "scott@gmail.com" } ;
+            Employee employee2 = new Employee() { EmployeeID = 2, EmployeeName = "Allen", Email = "allen@gmail.com" } ;
+            Employee employee3 = new Employee() { EmployeeID = 3, EmployeeName = "Smith", Email = "smith@gmail.com" } ;
 
-            student.examinations = new List<Examination>();
-            student.examinations.Add(new Examination() { ExaminationName = "Module Test 1", Month = 5, Year = 2021, MaxMarks = 100, SecuredMarks = 87 });
-            student.examinations.Add(new Examination() { ExaminationName = "Module Test 2", Month = 7, Year = 2022, MaxMarks = 100, SecuredMarks = 70 });
-            student.examinations.Add(new Examination() { ExaminationName = "Final Test", Month = 11, Year = 2023, MaxMarks = 100, SecuredMarks = 91 });
+            Department department = new Department() { DepartmentID = 10, DepartmentName = "Accounting" };
+            employee1.dept = department;
+            employee2.dept = department;
+            employee3.dept = department;
 
-            Console.WriteLine(student.RollNo);
-            Console.WriteLine(student.StudentName);
-            Console.WriteLine(student.Email);
-            Console.WriteLine("Examinations:");
-            foreach (Examination exam in student.examinations)
-            {
-                Console.WriteLine(exam.ExaminationName + ", " + exam.Year + ", " + exam.Month + ", " + exam.SecuredMarks + "/" + exam.MaxMarks);
-            }
+            Console.WriteLine("Employee 1: ");
+            Console.WriteLine("Employee ID: " + employee1.EmployeeID);
+            Console.WriteLine("Employee Name: " + employee1.EmployeeName);
+            Console.WriteLine("Email: " + employee1.Email);
+            Console.WriteLine("Department ID: " + employee1.dept.DepartmentID);
+            Console.WriteLine("Department Name: " + employee1.dept.DepartmentName);
+
+            Console.WriteLine("\nEmployee 2: ");
+            Console.WriteLine("Employee ID: " + employee2.EmployeeID);
+            Console.WriteLine("Employee Name: " + employee2.EmployeeName);
+            Console.WriteLine("Email: " + employee2.Email);
+            Console.WriteLine("Department ID: " + employee2.dept.DepartmentID);
+            Console.WriteLine("Department Name: " + employee2.dept.DepartmentName);
+
+            Console.WriteLine("\nEmployee 3: ");
+            Console.WriteLine("Employee ID: " + employee3.EmployeeID);
+            Console.WriteLine("Employee Name: " + employee3.EmployeeName);
+            Console.WriteLine("Email: " + employee3.Email);
+            Console.WriteLine("Department ID: " + employee3.dept.DepartmentID);
+            Console.WriteLine("Department Name: " + employee3.dept.DepartmentName);
 
             Console.ReadKey();
         }
