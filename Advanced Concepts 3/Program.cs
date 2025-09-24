@@ -12,19 +12,23 @@ namespace Advanced_Concepts_3
         static void Main()
         {
             Student student = new Student();
-            student.RollNo = 123;
-            student.StudentName = "Scott";
-            student.Email = "scott@gmail.com";
+            student.RollNo = 1;
+            student.StudentName = "Allen";
+            student.Email = "allen@gmail.com";
 
-            student.branch = new Branch();
-            student.branch.BranchName = "Computer Science Engineering";
-            student.branch.NoOfSemesters = 8;
+            student.examinations = new List<Examination>();
+            student.examinations.Add(new Examination() { ExaminationName = "Module Test 1", Month = 5, Year = 2021, MaxMarks = 100, SecuredMarks = 87 });
+            student.examinations.Add(new Examination() { ExaminationName = "Module Test 2", Month = 7, Year = 2022, MaxMarks = 100, SecuredMarks = 70 });
+            student.examinations.Add(new Examination() { ExaminationName = "Final Test", Month = 11, Year = 2023, MaxMarks = 100, SecuredMarks = 91 });
 
             Console.WriteLine(student.RollNo);
             Console.WriteLine(student.StudentName);
             Console.WriteLine(student.Email);
-            Console.WriteLine(student.branch.BranchName);
-            Console.WriteLine(student.branch.NoOfSemesters);
+            Console.WriteLine("Examinations:");
+            foreach (Examination exam in student.examinations)
+            {
+                Console.WriteLine(exam.ExaminationName + ", " + exam.Year + ", " + exam.Month + ", " + exam.SecuredMarks + "/" + exam.MaxMarks);
+            }
 
             Console.ReadKey();
         }
