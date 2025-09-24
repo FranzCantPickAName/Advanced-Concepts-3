@@ -11,65 +11,19 @@ namespace Advanced_Concepts_3
     {
         static void Main()
         {
-            CustomersList customersList = new CustomersList()
+            //list of employees
+            List<Employee> employees = new List<Employee>()
             {
-                new Customer() { CustomerID = "A101", CustomerName = "James", Email = "james@gmail.com", CustomerType = TypeOfCustomer.RegularCustomer },
-                new Customer() { CustomerID = "A201", CustomerName = "Bob", Email = "bob@gmail.com", CustomerType = TypeOfCustomer.VIPCustomer },
-                new Customer() { CustomerID = "A301", CustomerName = "Alice", Email = "alice@gmail.com", CustomerType = TypeOfCustomer.VIPCustomer }
+                new Employee() { EmpID = 104, EmpName = "Mary", Job = "Designer" },
+                new Employee() { EmpID = 102, EmpName = "Alexa", Job = "Manager" },
+                new Employee() { EmpID = 101, EmpName = "Steven", Job = "Consultant" },
+                new Employee() { EmpID = 103, EmpName = "Jade", Job = "Analyst" }
             };
-
-            //Add
-            Customer new_cust = new Customer() { CustomerID = "A456", CustomerName = "Jacob", Email = "jacob@example.com", CustomerType = TypeOfCustomer.VIPCustomer };
-            customersList.Add(new_cust);
-
-            Customer another_cust = new Customer() { CustomerID = "A456", CustomerName = "Jacobb", Email = "jacob@example.com", CustomerType = TypeOfCustomer.VIPCustomer };
-
-            Console.WriteLine();
-            //Contains
-            Console.WriteLine("Contains: " + customersList.Contains(new_cust));  // True
-            Console.WriteLine("Contains: " + customersList.Contains(another_cust));  // True
-            Console.WriteLine(customersList.Count + " customers found.");
-
-            foreach (Customer customer in customersList)
+            employees.Sort();
+            foreach (Employee item in employees)
             {
-                Console.WriteLine(customer.CustomerID + ", " + customer.CustomerName + ", " + customer.Email + ", " + customer.CustomerType);
+                Console.WriteLine(item.EmpID + ", " + item.EmpName + ", " + item.Job);
             }
-
-
-            customersList.Remove(new_cust);
-            foreach (Customer customer in customersList)
-            {
-                Console.WriteLine(customer.CustomerID + ", " + customer.CustomerName + ", " + customer.Email + ", " + customer.CustomerType);
-            }
-
-            Customer matchingCustomer = customersList.Find(cust => cust.CustomerID == "A101");
-            if (matchingCustomer != null)
-            {
-                Console.WriteLine(matchingCustomer.CustomerID + ", " + matchingCustomer.CustomerName);
-            }
-
-            List<Customer> vipcust = customersList.FindAll(cust => cust.CustomerType == TypeOfCustomer.VIPCustomer);
-            Console.WriteLine("\nVIP customers: ");
-            foreach (Customer customer in vipcust)
-            {
-                Console.WriteLine(customer.CustomerID + ", " + customer.CustomerName + ", " + customer.Email + ", " + customer.CustomerType);
-            }
-
-            //IndexOf
-            Console.WriteLine("IndexOf: " + customersList.IndexOf(new_cust));
-
-            //Insert
-            customersList.Insert(2, new_cust);
-            Console.WriteLine(customersList[2].CustomerID + ", " + customersList[2].CustomerName);
-
-            customersList.RemoveAt(1);
-
-            foreach (Customer customer in customersList)
-            {
-                Console.WriteLine(customer.CustomerID + ", " + customer.CustomerName + ", " + customer.Email + ", " + customer.CustomerType);
-            }
-
-            customersList.Clear();
 
             Console.ReadKey();
         }
