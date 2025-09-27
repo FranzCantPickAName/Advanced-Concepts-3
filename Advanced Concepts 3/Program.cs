@@ -13,18 +13,17 @@ namespace Advanced_Concepts_3
         {
             Customer customer = new Customer();
 
-            //Without deconstruction
-            //(int customerID, string customerName, string email) cust = customer.GetCustomerDetails();
+            //Using all fields
+            //(int customerID, string customerName, string email) = customer.GetCustomerDetails();
 
-            //Console.WriteLine(cust.customerID);
-            //Console.WriteLine(cust.customerName);
-            //Console.WriteLine(cust.email);
+            //Console.WriteLine(customerID);
+            //Console.WriteLine(customerName);
+            //Console.WriteLine(email);
 
-            //With deconstruction
-            (int customerID, string customerName, string email) = customer.GetCustomerDetails();
+            //Skipping a field (customerName)
+            (int customerID, _, string email) = customer.GetCustomerDetails();
 
             Console.WriteLine(customerID);
-            Console.WriteLine(customerName);
             Console.WriteLine(email);
 
             Console.ReadKey();
