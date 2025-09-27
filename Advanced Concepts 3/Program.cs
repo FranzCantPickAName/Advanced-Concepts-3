@@ -11,14 +11,20 @@ namespace Advanced_Concepts_3
     {
         static void Main()
         {
-            Person p = new Person();
+            var persons = new[]
+            {
+                new { PersonName = "Scott", Email = "scott@gmail.com" },
+                new { PersonName = "Smith", Email = "smith@gmail.com" },
+                new { PersonName = "Allen", Email = "allen@gmail.com" },
+                new { PersonName = "Jones", Email = "jones@gmail.com" }
+            };
 
-            var person = new { PersonName = p.GetPersonName(), Age = p.GetPersonAge(), Address = new { Street = "abc", City = "xyz" } };
-
-            Console.WriteLine(person.PersonName);
-            Console.WriteLine(person.Age);
-            Console.WriteLine(person.Address.City);
-            Console.WriteLine(person.Address.Street);
+            foreach (var item in persons)
+            {
+                Console.Write(item.PersonName);
+                Console.Write(", ");
+                Console.WriteLine(item.Email);
+            }
 
             Console.ReadKey();
         }
