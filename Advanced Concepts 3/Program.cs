@@ -11,11 +11,21 @@ namespace Advanced_Concepts_3
     {
         static void Main()
         {
-            Sample s = new Sample();
-            Tuple<string, int> person = s.GetPersonDetails();
+            Customer customer = new Customer();
 
-            Console.WriteLine(person.Item1);
-            Console.WriteLine(person.Item2);
+            //Without deconstruction
+            //(int customerID, string customerName, string email) cust = customer.GetCustomerDetails();
+
+            //Console.WriteLine(cust.customerID);
+            //Console.WriteLine(cust.customerName);
+            //Console.WriteLine(cust.email);
+
+            //With deconstruction
+            (int customerID, string customerName, string email) = customer.GetCustomerDetails();
+
+            Console.WriteLine(customerID);
+            Console.WriteLine(customerName);
+            Console.WriteLine(email);
 
             Console.ReadKey();
         }

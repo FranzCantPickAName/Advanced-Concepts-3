@@ -5,12 +5,11 @@ using System.Collections.Generic;
 namespace ClassLibrary1
 {
 
-    public class Sample
+    public class Customer
     {
-        public Tuple<string, int> GetPersonDetails()
+        public (int customerID, string customerName, string email) GetCustomerDetails()
         {
-            Tuple<string, int> tuple = new Tuple<string, int>("Scott", 20);
-            return tuple;
+            return (101, "Scott", "scott@gmail.com");
         }
     }
 
