@@ -11,18 +11,24 @@ namespace Advanced_Concepts_3
     {
         static void Main()
         {
-            //list of employees
+            //collection of objects
             List<Employee> employees = new List<Employee>()
             {
-                new Employee() { EmpID = 104, EmpName = "Mary", Job = "Designer" },
-                new Employee() { EmpID = 102, EmpName = "Alexa", Job = "Manager" },
-                new Employee() { EmpID = 101, EmpName = "Steven", Job = "Consultant" },
-                new Employee() { EmpID = 103, EmpName = "Jade", Job = "Analyst" }
+                new Employee() { EmpID = 104, EmpName = "Mary", Job = "Designer"},
+                new Employee() { EmpID = 102, EmpName = "Alexa", Job = "Manager"},
+                new Employee() { EmpID = 101, EmpName = "Steven", Job = "Consultant"},
+                new Employee() { EmpID = 103, EmpName = "Jade", Job = "Manager"},
+                new Employee() { EmpID = 105, EmpName = "Sara", Job = null}
             };
-            employees.Sort();
-            foreach (Employee item in employees)
+
+            CustomComparer customComparer = new CustomComparer();
+            customComparer.sortBy = SortBy.Job;
+            employees.Sort(customComparer); //EmpName
+            //employees.Reverse();
+
+            foreach (Employee emp in employees)
             {
-                Console.WriteLine(item.EmpID + ", " + item.EmpName + ", " + item.Job);
+                Console.WriteLine(emp.EmpID + ", " + emp.EmpName + ", " + emp.Job);
             }
 
             Console.ReadKey();

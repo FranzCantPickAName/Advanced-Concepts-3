@@ -6,28 +6,70 @@ namespace ClassLibrary1
 {
 
     //moodel class
-    public class Employee : IComparable
+    public class Employee
     {
         public int EmpID { get; set; }
         public string EmpName { get; set; }
         public string Job { get; set; }
+    }
 
-        //Sort by EmpID(int)
-        public int CompareTo(object other)
-        {
-            Employee otherEmp = (Employee)other;
-            Console.WriteLine("Comparing " + this.EmpID + " with " + otherEmp.EmpID);
-            return this.EmpID - otherEmp.EmpID;  //returns 0, -1 or 1
-        }
+    public enum SortBy
+    {
+        EmpID, EmpName, Job
+    }
 
-        //Sort by EmpName (string)
-        //public int CompareTo(object other)
+    public class CustomComparer : IComparer<Employee>
+    {
+        //Sort by EmpID
+        //public int Compare(Employee x, Employee y)
         //{
-        //    Employee otherEmp = (Employee)other;
-        //    Console.WriteLine(this.EmpName + ", " + otherEmp.EmpName);
-        //    return this.EmpName.CompareTo(otherEmp.EmpName);  //returns 0, -1 or 1
+        //    return x.EmpID - y.EmpID;
         //}
 
+        //Sort by EmpName
+        //public int Compare(Employee x, Employee y)
+        //{
+        //    return x.EmpName.CompareTo(y.EmpName);
+        //}
+
+        //Sort By Job, EmpName
+        //public int Compare(Employee x, Employee y)
+        //{
+        //    int result = 0;
+        //    if (x.Job != null)
+        //    {
+        //        result = x.Job.CompareTo(y.Job); //first sorting column
+        //    }
+        //    if (result == 0)
+        //    {
+        //        if (x.EmpName != null)
+        //        {
+        //            result = x.EmpName.CompareTo(y.EmpName); //second sorting column
+        //        }
+        //    }
+        //    return result;
+        //}
+
+        //Sort by selected column
+        public int Compare(Employee x, Employee y)
+        {
+            int result = 0;
+            switch (this.sortBy)
+            {
+                case SortBy.EmpID:
+                    result = x.EmpID - y.EmpID; break;
+                case SortBy.EmpName:
+                    result = (x.EmpName != null) ? x.EmpName.CompareTo(y.EmpName) : 0; break;
+                case SortBy.Job:
+                    result = (x.Job != null) ? x.Job.CompareTo(y.Job) : 0; break;
+                default:
+                    result = 0; break;
+            }
+            return result;
+        }
+
+        public SortBy sortBy { get; set; }
     }
 
 }
+
