@@ -7,15 +7,13 @@ namespace Advanced_Concepts_3
     {
         static void Main()
         {
-            MarksCalculation.CalculationHelper ch = new MarksCalculation.CalculationHelper();
+            string x = "Hello World";
+            int n = x.Length;
+            char c = x[0];
 
-            Console.WriteLine(ch.Multiply(10, 5));
-
-            MarksCalculation mc = new MarksCalculation();
-            Student s = new Student() { SecuredMarks = 35, MaxMarks = 50 };
-
-            mc.CalculatePercentage(s);
-            Console.WriteLine(s.Percentage);
+            Console.WriteLine(x);
+            Console.WriteLine(n);
+            Console.WriteLine(c);
 
             Console.ReadKey();
         }
