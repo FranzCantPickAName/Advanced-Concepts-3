@@ -5,15 +5,12 @@ using System.Collections.Generic;
 namespace ClassLibrary1
 {
 
-    public class Person
+    public class Sample
     {
-        public string GetPersonName()
+        public Tuple<string, int> GetPersonDetails()
         {
-            return "Smith";
-        }
-        public int GetPersonAge()
-        {
-            return 25;
+            Tuple<string, int> tuple = new Tuple<string, int>("Scott", 20);
+            return tuple;
         }
     }
 

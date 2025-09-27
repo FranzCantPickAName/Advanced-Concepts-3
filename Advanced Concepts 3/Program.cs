@@ -11,20 +11,11 @@ namespace Advanced_Concepts_3
     {
         static void Main()
         {
-            var persons = new[]
-            {
-                new { PersonName = "Scott", Email = "scott@gmail.com" },
-                new { PersonName = "Smith", Email = "smith@gmail.com" },
-                new { PersonName = "Allen", Email = "allen@gmail.com" },
-                new { PersonName = "Jones", Email = "jones@gmail.com" }
-            };
+            Sample s = new Sample();
+            Tuple<string, int> person = s.GetPersonDetails();
 
-            foreach (var item in persons)
-            {
-                Console.Write(item.PersonName);
-                Console.Write(", ");
-                Console.WriteLine(item.Email);
-            }
+            Console.WriteLine(person.Item1);
+            Console.WriteLine(person.Item2);
 
             Console.ReadKey();
         }
