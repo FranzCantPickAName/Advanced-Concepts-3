@@ -11,14 +11,18 @@ namespace Advanced_Concepts_3
     {
         static void Main()
         {
-            LivingThing livingThing = new Parrot();
+            //create normal object
             Parrot parrot = new Parrot() { NumberOfLegs = 2 };
+            Dog dog = new Dog() { NumberOfLegs = 4 };
 
-            IMover<LivingThing> mover = new Mover<Parrot>() { thing = parrot };
-            Console.WriteLine("Moving with " + mover.Move().NumberOfLegs + " legs");
+            // Contravariance = supply the parent type name, where the child type name is expected.
+            IMover<Parrot> obj1 = new Mover<Parrot>(); //normal
+            IMover<Parrot> obj2 = new Mover<LivingThing>();
+            //"Parrot" vs "LivingThing"; supplying the parent type (LivingThing), where the child type (Parrot) is expected.
+            obj2.Move(parrot);
 
-            Sample sample = new Sample();
-            sample.PrintValues(new List<string>() { "hello", "world" });
+            IMover<Dog> obj3 = new Mover<LivingThing>();
+            obj3.Move(dog);
 
             Console.ReadKey();
         }

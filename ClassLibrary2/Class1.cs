@@ -5,46 +5,28 @@ using System.Collections.Generic;
 namespace ClassLibrary1
 {
 
-    //moodel class
     public class LivingThing
     {
         public int NumberOfLegs { get; set; }
-
     }
-
-    public class Parrot: LivingThing
+    public class Parrot : LivingThing
     {
-
     }
-
-    public class Dog: LivingThing
+    public class Dog : LivingThing
     {
-
     }
-
-    public interface IMover<out T>
+    public interface IMover<in T>
     {
-        T Move();
+        void Move(T x);
     }
-
     public class Mover<T> : IMover<T>
     {
-        public T thing { get; set; }
-        public T Move()
+        public void Move(T x)
         {
-            return thing;
-        }
-    }
-
-    public class Sample
-    {
-        public void PrintValues(IEnumerable<object> values)
-        {
-            foreach (var item in values)
-            {
-                Console.WriteLine(item + ", ");
-            }
-            Console.WriteLine();
+            if (x is Parrot)
+                Console.WriteLine("Moving with " + (x as Parrot).NumberOfLegs + " legs");
+            else
+                Console.WriteLine("Moving with " + (x as Dog).NumberOfLegs + " legs");
         }
     }
 
