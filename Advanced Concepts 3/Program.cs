@@ -7,34 +7,56 @@ namespace Advanced_Concepts_3
     {
         static void Main()
         {
-            string str = "Developer";
-            Console.WriteLine(str);
+            string str = "Universe";
+            string str2 = "Universe";
 
-            Console.WriteLine("\nUpper: " + str.ToUpper());
-            Console.WriteLine("Lower: " + str.ToLower());
-            Console.WriteLine("Substring at 4: " + str.Substring(4));
-            Console.WriteLine("Substring at 4 (3 characters): " + str.Substring(4, 3));
-            Console.WriteLine("Replace: " + str.Replace("e", "a"));
+            bool eq = str.Equals(str2);
+            bool eq2 = str == str2;
 
-            string message = "how are you";
-            string[] words = message.Split(' ');
-            Console.WriteLine("\nSplit:");
-            foreach (string word in words) Console.WriteLine(word);
+            Console.WriteLine("Equals: " + eq);
+            Console.WriteLine("==: " + eq2);
 
-            string message_with_spaces = "   hello   ";
-            Console.WriteLine(message_with_spaces.Trim());
+            bool sw = str.StartsWith("U");
+            Console.WriteLine("Starts with U: " + sw);
+            bool sw2 = str.StartsWith("e");
+            Console.WriteLine("Starts with e: " + sw2);
 
-            char[] characters = str.ToCharArray();
-            Console.WriteLine("\nCharacters: ");
-            foreach (char character in characters) Console.WriteLine(character);
+            bool ew = str.EndsWith("e");
+            bool ew2 = str.EndsWith("U");
+            Console.WriteLine("Ends with e: " + ew);
+            Console.WriteLine("Ends with U: " + ew2);
 
-            string[] my_words = new string[] { "how", "are", "you" };
-            string str_jn = string.Join("--", my_words);
-            Console.WriteLine("Join: " + str_jn);
+            bool ct = str.Contains("e");
+            bool ct2 = str.Contains("t");
+            Console.WriteLine("Contains e: " + ct);
+            Console.WriteLine("Contains t: " + ct2);
 
-            char[] characters2 = new char[] { 'h', 'e', 'l', 'l', 'o' };
-            string str2 = new string(characters2);
-            Console.WriteLine("New string: " + str2);
+            string name = "developer";
+            Console.WriteLine("Index of e: " + name.IndexOf("e"));
+            Console.WriteLine("Index of vel: " + name.IndexOf("vel"));
+            Console.WriteLine("Index of gel: " + name.IndexOf("gel"));
+            Console.WriteLine("Index of e (past index 2): " + name.IndexOf("e", 2));
+            Console.WriteLine("Index of e (past index 4): " + name.IndexOf("e", 4));
+
+            Console.WriteLine("Last index of e: " + name.LastIndexOf("e"));
+            Console.WriteLine("Last index of vel: " + name.LastIndexOf("vel"));
+            Console.WriteLine("Last index of gel: " + name.LastIndexOf("gel"));
+            Console.WriteLine("Last index of e (before index 2): " + name.LastIndexOf("e", 2));
+            Console.WriteLine("Last index of e (before index 4): " + name.LastIndexOf("e", 4));
+
+            string user_input = null;
+            string user_input2 = "";
+            string user_input3 = " ";
+            Console.WriteLine("Is null or empty (null): " + string.IsNullOrEmpty(user_input));
+            Console.WriteLine("Is null or empty (\"\"): " + string.IsNullOrEmpty(user_input2));
+            Console.WriteLine("Is null or empty (\" \"): " + string.IsNullOrEmpty(user_input3));
+
+            Console.WriteLine("Is null or white space (null): " + string.IsNullOrWhiteSpace(user_input));
+            Console.WriteLine("Is null or white space (\"\"): " + string.IsNullOrWhiteSpace(user_input2));
+            Console.WriteLine("Is null or white space (\" \"): " + string.IsNullOrWhiteSpace(user_input3));
+
+
+
 
             Console.ReadKey();
         }
