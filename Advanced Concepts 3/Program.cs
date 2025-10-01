@@ -7,13 +7,41 @@ namespace Advanced_Concepts_3
     {
         static void Main()
         {
-            string name = "Developer";
-            string name_updated = name.Insert(4, "sad");
-            Console.WriteLine(name_updated);
+            string name = "developer@example.com";
+            char[] vowels = new char[] { 'A', 'E', 'I', 'O', 'U', 'a', 'e', 'i', 'o', 'u' };
 
-            string name_updated2 = name.Remove(2, 4);
-            Console.WriteLine(name_updated2);
+            int vowelsCount = 0;
+            for (int i = 0; i < name.Length; i++)
+            {
+                //bool isMatch = false;
+                for (int j = 0; j < vowels.Length; j++)
+                {
+                    if (name[i] == vowels[j])
+                    {
+                        //isMatch = true;
+                        vowelsCount++;
+                    }
+                }
+                //if (isMatch)
+                //{
+                //    vowelsCount++;
+                //}
+            }
 
+            Console.WriteLine(vowelsCount + " vowels found.");
+            Console.WriteLine();
+
+            //Alternative using only one for loop
+            vowelsCount = 0;
+            for (int i = 0; i < name.Length; i++)
+            {
+                if (Array.IndexOf(vowels, name[i]) >= 0)
+                {
+                    vowelsCount++;
+                }
+            }
+
+            Console.WriteLine(vowelsCount + " vowels found.");
 
             Console.ReadKey();
         }
