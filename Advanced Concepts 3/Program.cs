@@ -1,5 +1,6 @@
 ﻿using ClassLibrary1;
 using System;
+using System.Text;
 
 namespace Advanced_Concepts_3
 {
@@ -7,41 +8,34 @@ namespace Advanced_Concepts_3
     {
         static void Main()
         {
-            string name = "developer@example.com";
-            char[] vowels = new char[] { 'A', 'E', 'I', 'O', 'U', 'a', 'e', 'i', 'o', 'u' };
+            string[] words = new string[] { "The", "quick", "brown", "fox", "jumps", "over", "the", "lazy", "dog" };
 
-            int vowelsCount = 0;
-            for (int i = 0; i < name.Length; i++)
+            string sentence = "";
+            foreach (string word in words)
             {
-                //bool isMatch = false;
-                for (int j = 0; j < vowels.Length; j++)
-                {
-                    if (name[i] == vowels[j])
-                    {
-                        //isMatch = true;
-                        vowelsCount++;
-                    }
-                }
-                //if (isMatch)
-                //{
-                //    vowelsCount++;
-                //}
+                sentence = sentence + " " + word;
             }
+            Console.WriteLine(sentence);
 
-            Console.WriteLine(vowelsCount + " vowels found.");
+            //Doing the same, but with StringBuilder
+            StringBuilder builder = new StringBuilder();
+            foreach (string word in words)
+            {
+                builder.Append(word);
+                builder.Append(" ");
+                Console.WriteLine(builder.ToString() + ", " + builder.Length + ", " + builder.Capacity);
+            }
             Console.WriteLine();
 
-            //Alternative using only one for loop
-            vowelsCount = 0;
-            for (int i = 0; i < name.Length; i++)
-            {
-                if (Array.IndexOf(vowels, name[i]) >= 0)
-                {
-                    vowelsCount++;
-                }
-            }
+            StringBuilder builder2 = new StringBuilder(builder.ToString());
+            builder[0] = 'v';
+            Console.WriteLine(builder.ToString());
+            Console.WriteLine(builder.MaxCapacity);
 
-            Console.WriteLine(vowelsCount + " vowels found.");
+            Console.WriteLine(builder.Insert(5, "updated"));
+            Console.WriteLine(builder.Remove(builder.ToString().IndexOf("q"), 5));
+            Console.WriteLine(builder2.Remove(builder2.ToString().IndexOf("q"), 5));
+            Console.WriteLine(builder.Replace("a", "r"));
 
             Console.ReadKey();
         }
