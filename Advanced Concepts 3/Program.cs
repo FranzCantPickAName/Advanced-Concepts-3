@@ -23,6 +23,10 @@ namespace Advanced_Concepts_3
                 Console.WriteLine("Date of joining is not before today's date, employee experience is zero.");
             }
 
+            Console.WriteLine("After 10 days: " + emp.DateOfJoining.AddDays(10));
+            Console.WriteLine("Before 10 days: " + emp.DateOfJoining.AddDays(-10));
+            Console.WriteLine("After 20 months and 5 days: " + emp.DateOfJoining.AddMonths(20).AddDays(5));
+
 
                 Console.ReadKey();
         }
