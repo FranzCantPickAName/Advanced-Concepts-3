@@ -8,34 +8,40 @@ namespace Advanced_Concepts_3
     {
         static void Main()
         {
-            string[] words = new string[] { "The", "quick", "brown", "fox", "jumps", "over", "the", "lazy", "dog" };
+            Person person1 = new Person();
 
-            string sentence = "";
-            foreach (string word in words)
-            {
-                sentence = sentence + " " + word;
-            }
-            Console.WriteLine(sentence);
+            person1.PersonName = "Miller";
+            person1.DateOfBirth = DateTime.Parse("2000-12-31 11:59:59.999 am");
+            Console.WriteLine(person1.DateOfBirth.ToString());
 
-            //Doing the same, but with StringBuilder
-            StringBuilder builder = new StringBuilder();
-            foreach (string word in words)
-            {
-                builder.Append(word);
-                builder.Append(" ");
-                Console.WriteLine(builder.ToString() + ", " + builder.Length + ", " + builder.Capacity);
-            }
+            Console.WriteLine("Day " + person1.DateOfBirth.Day);
+            Console.WriteLine("Month " + person1.DateOfBirth.Month);
+            Console.WriteLine("Year " + person1.DateOfBirth.Year);
+            Console.WriteLine("Hours " + person1.DateOfBirth.Hour);
+            Console.WriteLine("Minutes " + person1.DateOfBirth.Minute);
+            Console.WriteLine("Seconds " + person1.DateOfBirth.Second);
+            Console.WriteLine("Milliseconds " + person1.DateOfBirth.Millisecond);
+            Console.WriteLine("Day of week " + person1.DateOfBirth.DayOfWeek);
+            Console.WriteLine("Day of week (as int) " + (int)person1.DateOfBirth.DayOfWeek);
+            Console.WriteLine("Day of year " + person1.DateOfBirth.DayOfYear);
+            Console.WriteLine("Days in month " + DateTime.DaysInMonth(person1.DateOfBirth.Year, person1.DateOfBirth.Month));
+
             Console.WriteLine();
+            DateTime dt = DateTime.Now;
+            Console.WriteLine(dt.ToString());
 
-            StringBuilder builder2 = new StringBuilder(builder.ToString());
-            builder[0] = 'v';
-            Console.WriteLine(builder.ToString());
-            Console.WriteLine(builder.MaxCapacity);
+            Console.WriteLine();
+            DateTime dt2 = new DateTime(2025, 10, 1, 0, 0, 0, 000);
 
-            Console.WriteLine(builder.Insert(5, "updated"));
-            Console.WriteLine(builder.Remove(builder.ToString().IndexOf("q"), 5));
-            Console.WriteLine(builder2.Remove(builder2.ToString().IndexOf("q"), 5));
-            Console.WriteLine(builder.Replace("a", "r"));
+            Console.WriteLine(dt2.ToString());
+            Console.WriteLine(dt2.ToShortDateString());
+            Console.WriteLine(dt2.ToLongDateString());
+            Console.WriteLine(dt2.ToShortTimeString());
+            Console.WriteLine(dt2.ToLongTimeString());
+            Console.WriteLine(dt2.ToString("dd-MM-yyyy HH:mm:ss"));
+            Console.WriteLine(DateTime.DaysInMonth(dt2.Year, dt2.Month));
+            Console.WriteLine(DateTime.IsLeapYear(dt2.Year));
+
 
             Console.ReadKey();
         }
