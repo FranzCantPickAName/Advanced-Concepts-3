@@ -2,10 +2,12 @@
 
 namespace ClassLibrary1
 {
-    public class Person
+    public class Employee
     {
-        public string PersonName { get; set; }
-        public DateTime DateOfBirth { get; set; }
+        public string EmployeeName { get; set; }
+        public DateTime DateOfJoining { get; set; }
+        public double ExperienceYears { get; set; }
+        public double ExperienceMonths { get; set; }
     }
 
 }

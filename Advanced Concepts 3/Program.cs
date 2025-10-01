@@ -8,42 +8,23 @@ namespace Advanced_Concepts_3
     {
         static void Main()
         {
-            Person person1 = new Person();
+            Employee emp = new Employee() { EmployeeName = "John", DateOfJoining = DateTime.Parse("2015-01-01") };
 
-            person1.PersonName = "Miller";
-            person1.DateOfBirth = DateTime.Parse("2000-12-31 11:59:59.999 am");
-            Console.WriteLine(person1.DateOfBirth.ToString());
-
-            Console.WriteLine("Day " + person1.DateOfBirth.Day);
-            Console.WriteLine("Month " + person1.DateOfBirth.Month);
-            Console.WriteLine("Year " + person1.DateOfBirth.Year);
-            Console.WriteLine("Hours " + person1.DateOfBirth.Hour);
-            Console.WriteLine("Minutes " + person1.DateOfBirth.Minute);
-            Console.WriteLine("Seconds " + person1.DateOfBirth.Second);
-            Console.WriteLine("Milliseconds " + person1.DateOfBirth.Millisecond);
-            Console.WriteLine("Day of week " + person1.DateOfBirth.DayOfWeek);
-            Console.WriteLine("Day of week (as int) " + (int)person1.DateOfBirth.DayOfWeek);
-            Console.WriteLine("Day of year " + person1.DateOfBirth.DayOfYear);
-            Console.WriteLine("Days in month " + DateTime.DaysInMonth(person1.DateOfBirth.Year, person1.DateOfBirth.Month));
-
-            Console.WriteLine();
-            DateTime dt = DateTime.Now;
-            Console.WriteLine(dt.ToString());
-
-            Console.WriteLine();
-            DateTime dt2 = new DateTime(2025, 10, 1, 0, 0, 0, 000);
-
-            Console.WriteLine(dt2.ToString());
-            Console.WriteLine(dt2.ToShortDateString());
-            Console.WriteLine(dt2.ToLongDateString());
-            Console.WriteLine(dt2.ToShortTimeString());
-            Console.WriteLine(dt2.ToLongTimeString());
-            Console.WriteLine(dt2.ToString("dd-MM-yyyy HH:mm:ss"));
-            Console.WriteLine(DateTime.DaysInMonth(dt2.Year, dt2.Month));
-            Console.WriteLine(DateTime.IsLeapYear(dt2.Year));
+            DateTime today = DateTime.Now;
+            if (today.CompareTo(emp.DateOfJoining) == 1)
+            {
+                TimeSpan ts = today.Subtract(emp.DateOfJoining);
+                emp.ExperienceYears = Math.Floor(ts.TotalDays / 365);
+                emp.ExperienceMonths = Math.Floor((ts.TotalDays - (emp.ExperienceYears * 365)) / 30);
+                Console.WriteLine(emp.ExperienceYears + " years and " + emp.ExperienceMonths + " months of experience");
+            }
+            else
+            {
+                Console.WriteLine("Date of joining is not before today's date, employee experience is zero.");
+            }
 
 
-            Console.ReadKey();
+                Console.ReadKey();
         }
     }
 }
