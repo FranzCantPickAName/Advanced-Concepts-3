@@ -7,12 +7,12 @@ namespace Advanced_Concepts_3
     {
         static void Main()
         {
-            string director = "Sam Raimi", movie = "Spiderman";
-            string message = string.Format("{0} is the director of {1}", director, movie);
-            string message2 = $"{director} is the director of {movie}";
+            string name = "Developer";
+            string name_updated = name.Insert(4, "sad");
+            Console.WriteLine(name_updated);
 
-            Console.WriteLine(message);
-            Console.WriteLine(message2);
+            string name_updated2 = name.Remove(2, 4);
+            Console.WriteLine(name_updated2);
 
 
             Console.ReadKey();
