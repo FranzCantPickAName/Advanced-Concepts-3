@@ -1,5 +1,6 @@
 ﻿using ClassLibrary1;
 using System;
+using System.Collections.Generic;
 using System.IO;
 
 namespace Advanced_Concepts_3
@@ -8,27 +9,26 @@ namespace Advanced_Concepts_3
     {
         static void Main()
         {
-            string filePath = @"c:\practice\Iran.txt", filePath2 = @"c:\practice\Iran2.txt", filePath3 = @"c:\practice\another.txt";
+            string filePath = @"c:\practice\dog.txt";
+            string content = "The dog is one of the common domestic animals.";
 
-            File.Create(filePath).Close();
-            Console.WriteLine("Iran.txt created");
+            File.WriteAllText(filePath, content);
+            Console.WriteLine("File dog.txt created/modified.");
 
-            bool exists = File.Exists(filePath);
-            if (exists)
+            string s = File.ReadAllText(filePath);
+            Console.WriteLine("\nFile contents:");
+            Console.WriteLine(s);
+
+            string filePath2 = @"c:\practice\asia.txt";
+            List<string> asia = new List<string>() { "Iran", "Iraq", "Japan" };
+
+            File.WriteAllLines(filePath2, asia);
+            Console.WriteLine("File asia.txt created/modified.");
+
+            string[] existingContent = File.ReadAllLines(filePath2);
+            foreach (string line in existingContent)
             {
-                File.Copy(filePath, filePath2);
-                Console.WriteLine("Copied Iran.txt to Iran2.txt");
-
-                File.Move(filePath2, filePath3);
-                Console.WriteLine("Moved Iran.txt to another.txt");
-
-                File.Delete(filePath3);
-                Console.WriteLine("Deleted another.txt");
-
-            }
-            else
-            {
-                Console.WriteLine("File not found.");
+                Console.WriteLine(line);
             }
 
                 Console.ReadKey();
