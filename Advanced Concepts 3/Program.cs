@@ -1,5 +1,6 @@
 ﻿using ClassLibrary1;
 using System;
+using System.IO;
 
 namespace Advanced_Concepts_3
 {
@@ -7,39 +8,30 @@ namespace Advanced_Concepts_3
     {
         static void Main()
         {
-            Console.WriteLine("Character 'A': ");
+            string filePath = @"c:\practice\Iran.txt", filePath2 = @"c:\practice\Iran2.txt", filePath3 = @"c:\practice\another.txt";
 
-            char ch = 'A';
-            byte b = (byte)ch;
-            Console.WriteLine(b);
-            char ch2 = (char)b;
-            Console.WriteLine(ch2);
+            File.Create(filePath).Close();
+            Console.WriteLine("Iran.txt created");
 
-            Console.WriteLine("\nBytes from 0 to 127: ");
-
-            byte[] bytes = new byte[128];
-            for (byte i = 0; i < 128; i++)
+            bool exists = File.Exists(filePath);
+            if (exists)
             {
-                bytes[i] = i;
+                File.Copy(filePath, filePath2);
+                Console.WriteLine("Copied Iran.txt to Iran2.txt");
+
+                File.Move(filePath2, filePath3);
+                Console.WriteLine("Moved Iran.txt to another.txt");
+
+                File.Delete(filePath3);
+                Console.WriteLine("Deleted another.txt");
+
             }
-            string s = System.Text.Encoding.ASCII.GetString(bytes);
-            Console.OutputEncoding = System.Text.Encoding.ASCII;
-            Console.WriteLine(s);
-
-            Console.WriteLine("\nSentence: ");
-
-            string sentence = "The quick brown fox jumps over the lazy dog.";
-            byte[] bytes2 = System.Text.Encoding.ASCII.GetBytes(sentence);
-            foreach (byte item in bytes2)
+            else
             {
-                Console.Write(item + " ");
+                Console.WriteLine("File not found.");
             }
 
-            Console.WriteLine();
-            string sentence2 = System.Text.Encoding.ASCII.GetString(bytes2);
-            Console.WriteLine(sentence2);
-
-            Console.ReadKey();
+                Console.ReadKey();
         }
     }
 }
