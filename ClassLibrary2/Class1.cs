@@ -1,29 +1,13 @@
-﻿namespace ClassLibrary1
+﻿using System;
+
+namespace ClassLibrary1
 {
-    public class Student
+    public class Employee
     {
-        public double SecuredMarks;
-        public double MaxMarks;
-        public double Percentage;
-    }
-
-    public class MarksCalculation
-    {
-        public void CalculatePercentage(Student s)
-        {
-            CalculationHelper ch = new CalculationHelper();
-            s.Percentage = ch.Multiply(s.SecuredMarks / s.MaxMarks, 100);
-        }
-
-        public class CalculationHelper
-        {
-            public double Multiply(double n1, double n2)
-            {
-                return n1 * n2;
-            }
-
-        }
-
+        public int EmpID { get; set; }
+        public string EmpName { get; set; }
+        public string Job { get; set; }
+        public string City { get; set; }
     }
 
 }
