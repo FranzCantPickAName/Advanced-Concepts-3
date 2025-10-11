@@ -12,50 +12,39 @@ namespace Advanced_Concepts_3
     {
         static void Main()
         {
-            string filePath = @"c:\practice\europe.txt";
-            FileInfo fileInfo = new FileInfo(filePath);
-            //FileStream fileStream = new FileStream(filePath, FileMode.Create, FileAccess.Write);
+            short countryID = 1;
+            string countryName = "France";
+            long population = 65273511;
+            string region = "Western Europe";
+            string filePath = @"c:\practice\france.txt";
+            FileStream fileStream = new FileStream(filePath, FileMode.Create, FileAccess.Write);
 
-            //4 ways to create new object of StreamWriter
-            //StreamWriter streamWriter = new StreamWriter(filePath);
-            //StreamWriter streamWriter = new StreamWriter(fileStream);
-            //StreamWriter streamWriter = fileInfo.AppendText();
-            //StreamWriter streamWriter = fileInfo.CreateText();
-
-            using (StreamWriter streamWriter = fileInfo.CreateText())
+            using (BinaryWriter binaryWriter = new BinaryWriter(fileStream))
             {
-                streamWriter.WriteLine("Russia has an approximate population of 145,934,000.");
-                streamWriter.WriteLine("Germany has an approximate population of 83,783,000.");
-                streamWriter.WriteLine("United Kingdom has an approximate population of 67,886,000.");
+                binaryWriter.Write(countryID);
+                binaryWriter.Write(countryName);
+                binaryWriter.Write(population);
+                binaryWriter.Write(region);
             }
-            Console.WriteLine("europe.txt created.");
+
+            Console.WriteLine("france.txt created.");
 
             FileStream fileStream2 = new FileStream(filePath, FileMode.Open, FileAccess.Read);
 
-            //3 ways to create new object of StreamReader
-            //StreamReader streamReader = new StreamReader(filePath);
-            //StreamReader streamReader = fileInfo.OpenText();
-            //StreamReader streamReader = new StreamReader(fileStream2);
-
-            using (StreamReader streamReader = new StreamReader(fileStream2))
+            using (BinaryReader binaryReader = new BinaryReader(fileStream2))
             {
-                Console.WriteLine("\nFile read. File content: ");
+                int countryID_from_file = binaryReader.ReadInt16();
+                string countryName_from_file = binaryReader.ReadString();
+                long population_from_file = binaryReader.ReadInt64();
+                string region_from_file = binaryReader.ReadString();
 
-                //To read full file
-                //string content_from_file = streamReader.ReadToEnd();
-                //Console.WriteLine(content_from_file);
-
-                //To read part by part (ie 10 characters at a time)
-                char[] buffer = new char[10];
-                int char_count;
-                do
-                {
-                    char_count = streamReader.Read(buffer, 0, buffer.Length);
-                    string s1 = new string(buffer);
-                    Console.WriteLine(s1);
-                }
-                while (char_count > 0);
+                Console.WriteLine("Country ID: " + countryID_from_file);
+                Console.WriteLine("Country Name: " + countryName_from_file);
+                Console.WriteLine("Country Population: " + population_from_file);
+                Console.WriteLine("Country Region: " + region_from_file);
             }
+
+
 
             Console.ReadKey();
         }
