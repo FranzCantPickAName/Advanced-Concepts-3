@@ -12,44 +12,50 @@ namespace Advanced_Concepts_3
     {
         static void Main()
         {
-            string filePath = @"c:\practice\dog.txt";
+            string filePath = @"c:\practice\europe.txt";
             FileInfo fileInfo = new FileInfo(filePath);
-
-            //Different ways to create the new file: (with potential limitations)
             //FileStream fileStream = new FileStream(filePath, FileMode.Create, FileAccess.Write);
-            //FileStream fileStream = File.Create(filePath);
-            //FileStream fileStream = File.Open(filePath, FileMode.Create, FileAccess.Write);
-            //FileStream fileStream = File.OpenWrite(filePath);
-            //FileStream fileStream = fileInfo.Create();
-            //FileStream fileStream = fileInfo.OpenWrite();
-            FileStream fileStream = fileInfo.Open(FileMode.Create, FileAccess.Write);
 
-            string content = "The dog is one of the domestic animals.";
-            byte[] bytes = System.Text.Encoding.ASCII.GetBytes(content);
+            //4 ways to create new object of StreamWriter
+            //StreamWriter streamWriter = new StreamWriter(filePath);
+            //StreamWriter streamWriter = new StreamWriter(fileStream);
+            //StreamWriter streamWriter = fileInfo.AppendText();
+            //StreamWriter streamWriter = fileInfo.CreateText();
 
-            fileStream.Write(bytes, 0, bytes.Length);
-            string content2 = "other text here";
-            byte[] bytes2 = Encoding.ASCII.GetBytes(content2);
-            fileStream.Write(bytes2 , 0, bytes2.Length);
+            using (StreamWriter streamWriter = fileInfo.CreateText())
+            {
+                streamWriter.WriteLine("Russia has an approximate population of 145,934,000.");
+                streamWriter.WriteLine("Germany has an approximate population of 83,783,000.");
+                streamWriter.WriteLine("United Kingdom has an approximate population of 67,886,000.");
+            }
+            Console.WriteLine("europe.txt created.");
 
-            fileStream.Close();
-            Console.WriteLine("dog.txt created.");
+            FileStream fileStream2 = new FileStream(filePath, FileMode.Open, FileAccess.Read);
 
-            //Different ways to read the file: (with potential limitations)
-            //FileStream fileStream2 = new FileStream(filePath, FileMode.OpenOrCreate, FileAccess.Read);
-            //FileStream fileStream2 = File.Open(filePath, FileMode.OpenOrCreate, FileAccess.Read);
-            //FileStream fileStream2 = File.OpenRead(filePath);
-            //FileStream fileStream2 = fileInfo.Open(FileMode.OpenOrCreate, FileAccess.Read);
-            FileStream fileStream2 = fileInfo.OpenRead();
+            //3 ways to create new object of StreamReader
+            //StreamReader streamReader = new StreamReader(filePath);
+            //StreamReader streamReader = fileInfo.OpenText();
+            //StreamReader streamReader = new StreamReader(fileStream2);
 
-            byte[] bytes3 = new byte[fileStream2.Length];
+            using (StreamReader streamReader = new StreamReader(fileStream2))
+            {
+                Console.WriteLine("\nFile read. File content: ");
 
-            fileStream2.Read(bytes3, 0, bytes3.Length);
+                //To read full file
+                //string content_from_file = streamReader.ReadToEnd();
+                //Console.WriteLine(content_from_file);
 
-            string content3 = Encoding.ASCII.GetString(bytes3);
-            Console.WriteLine("\nFile read. File contents: ");
-            Console.WriteLine(content3);
-            fileStream2.Close();
+                //To read part by part (ie 10 characters at a time)
+                char[] buffer = new char[10];
+                int char_count;
+                do
+                {
+                    char_count = streamReader.Read(buffer, 0, buffer.Length);
+                    string s1 = new string(buffer);
+                    Console.WriteLine(s1);
+                }
+                while (char_count > 0);
+            }
 
             Console.ReadKey();
         }
