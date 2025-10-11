@@ -10,100 +10,24 @@ namespace Advanced_Concepts_3
     {
         static void Main()
         {
-            //string countriesFolderPath = @"c:\practice\countries";
-            //Directory.CreateDirectory(countriesFolderPath);
-            //Console.WriteLine("countries folder created.");
+            DriveInfo[] allDrives = DriveInfo.GetDrives();
 
-            //string indiaPath = countriesFolderPath + @"\India";
-            //string ukPath = countriesFolderPath + @"\UK";
-            //string usaPath = countriesFolderPath + @"\USA";
-            //Directory.CreateDirectory(indiaPath);
-            //Directory.CreateDirectory(ukPath);
-            //Directory.CreateDirectory(usaPath);
-            //Console.WriteLine("Sub directories created: 'India', 'UK', 'USA' ");
-
-            //string capitalsFilePath = countriesFolderPath + @"\capitals.txt";
-            //string sportsFilePath = countriesFolderPath + @"\sports.txt";
-            //string populationFilePath = countriesFolderPath + @"\population.dat";
-
-            //File.Create(capitalsFilePath).Close();
-            //File.Create(sportsFilePath).Close();
-            //File.Create(populationFilePath).Close();
-            //Console.WriteLine("Files created: 'capitals.txt', 'sports.txt', 'population.dat' ");
-
-            //string worldFolderPath = @"c:\practice\world";
-            ////Move will throw an exception if the 'world' folder already exists
-            //Directory.Move(countriesFolderPath, worldFolderPath);
-            //Console.WriteLine("'countries' moved to 'world'.");
-
-            //string[] files = Directory.GetFiles(worldFolderPath, "*.txt");
-            //Console.WriteLine("\nText files: ");
-            //foreach (string file in files)
-            //{
-            //    Console.WriteLine(file);
-            //}
-
-            //string[] directories = Directory.GetDirectories(worldFolderPath);
-            //Console.WriteLine("\nSubdirectories: ");
-            //foreach (string directory in directories)
-            //{
-            //    Console.WriteLine(directory);
-            //}
-
-            //Directory.Delete(worldFolderPath, true);
-            //Console.WriteLine("'world' folder deleted.");
-
-            //Now using DirectoryInfo
-
-            string countriesFolderPath = @"c:\practice\countries";
-            DirectoryInfo directoryInfo = new DirectoryInfo(countriesFolderPath);
-            directoryInfo.Create();
-            Console.WriteLine("countries folder created.");
-
-            directoryInfo.CreateSubdirectory("Iran");
-            directoryInfo.CreateSubdirectory("UK");
-            directoryInfo.CreateSubdirectory("USA");
-            Console.WriteLine("Sub directories created: 'Iran', 'UK', 'USA' ");
-
-            new FileInfo(directoryInfo.FullName + @"\capitals.txt").Create().Close();
-            new FileInfo(directoryInfo.FullName + @"\sports.txt").Create().Close();
-            new FileInfo(directoryInfo.FullName + @"\population.txt").Create().Close();
-            Console.WriteLine("Files created: 'capitals.txt', 'sports.txt', 'population.dat' ");
-
-            string worldFolderPath = @"c:\practice\world";
-            //MoveTo will throw an exception if the 'world' folder already exists
-            directoryInfo.MoveTo(worldFolderPath);
-            Console.WriteLine("'countries' moved to 'world'.");
-
-            FileInfo[] files = directoryInfo.GetFiles();
-            Console.WriteLine("\nFiles: ");
-            foreach (FileInfo file in files)
+            foreach (DriveInfo driveInfo in allDrives)
             {
-                Console.WriteLine(file.FullName, file.Length);
-            }
+                Console.WriteLine("Name: " + driveInfo.Name);
+                Console.WriteLine("Drive Type: " + driveInfo.DriveType);
 
-            DirectoryInfo[] directories = directoryInfo.GetDirectories();
-            Console.WriteLine("\nSubdirectories: ");
-            foreach (DirectoryInfo directory in directories)
-            {
-                Console.WriteLine(directory.FullName);
-            }
+                //These will throw exceptions if the CDRom is empty
+                if (driveInfo.DriveType != DriveType.CDRom)
+                {
+                    Console.WriteLine("Volume Label: " + driveInfo.VolumeLabel);
+                    Console.WriteLine("Total Size: " + (driveInfo.TotalSize / 1024 / 1024 / 1024) + "GB");
+                    Console.WriteLine("Available Free Space: " + (driveInfo.AvailableFreeSpace / 1024 / 1024 / 1024) + "GB");
+                }
 
-            Console.WriteLine("\nAdditional DirectoryInfo: ");
-            Console.WriteLine("'world' directory exists: " + worldFolderPath);
-            if (directoryInfo.Exists)
-            {
-                Console.WriteLine("FullName: " + directoryInfo.FullName);
-                Console.WriteLine("Name: " + directoryInfo.Name);
-                Console.WriteLine("DirectoryName: " + directoryInfo.Parent);
-                Console.WriteLine("Root: " + directoryInfo.Root);
-                Console.WriteLine("LastWriteTime: " + directoryInfo.LastWriteTime);
-                Console.WriteLine("LastAccessTime: " + directoryInfo.LastAccessTime);
-                Console.WriteLine("CreationTime: " + directoryInfo.CreationTime);
+                Console.WriteLine("Root Directory: " + driveInfo.RootDirectory);
+                Console.WriteLine();
             }
-
-            directoryInfo.Delete(true);
-            Console.WriteLine("\n'world' folder deleted.");
 
             Console.ReadKey();
         }
