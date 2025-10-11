@@ -9,27 +9,42 @@ namespace Advanced_Concepts_3
     {
         static void Main()
         {
-            string filePath = @"c:\practice\dog.txt";
-            string content = "The dog is one of the common domestic animals.";
+            string filePath = @"c:\practice\japan.txt";
+            string destPath = @"c:\practice\another.txt";
+            string destPath2 = @"c:\practice\somethingelse.txt";
 
-            File.WriteAllText(filePath, content);
-            Console.WriteLine("File dog.txt created/modified.");
+            FileInfo fileInfo = new FileInfo(filePath);
 
-            string s = File.ReadAllText(filePath);
-            Console.WriteLine("\nFile contents:");
-            Console.WriteLine(s);
+            //fileInfo.Create().Close();
+            //Console.WriteLine("japan.txt created");
 
-            string filePath2 = @"c:\practice\asia.txt";
-            List<string> asia = new List<string>() { "Iran", "Iraq", "Japan" };
-
-            File.WriteAllLines(filePath2, asia);
-            Console.WriteLine("File asia.txt created/modified.");
-
-            string[] existingContent = File.ReadAllLines(filePath2);
-            foreach (string line in existingContent)
+            Console.WriteLine("japan.txt exists: " + fileInfo.Exists);
+            if (fileInfo.Exists)
             {
-                Console.WriteLine(line);
+                Console.WriteLine("FullName: " + fileInfo.FullName);
+                Console.WriteLine("Name: " + fileInfo.Name);
+                Console.WriteLine("DirectoryName: " + fileInfo.DirectoryName);
+                Console.WriteLine("Extension: " + fileInfo.Extension);
+                Console.WriteLine("Length: " + fileInfo.Length + " bytes");
+                Console.WriteLine("LastWriteTime: " + fileInfo.LastWriteTime);
+                Console.WriteLine("LastAccessTime: " + fileInfo.LastAccessTime);
+                Console.WriteLine("CreationTime: " + fileInfo.CreationTime);
             }
+            else
+            {
+                Console.WriteLine("File not found.");
+            }
+
+            Console.WriteLine();
+
+            FileInfo fileInfo2 = fileInfo.CopyTo(destPath, true);
+            Console.WriteLine(fileInfo2.Name + " created.");
+
+            fileInfo2.MoveTo(destPath2);
+            Console.WriteLine(fileInfo2.Name + " moved.");
+            
+            fileInfo2.Delete();
+            Console.WriteLine(fileInfo2.Name + " deleted.");
 
                 Console.ReadKey();
         }
