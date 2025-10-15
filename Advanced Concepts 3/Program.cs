@@ -9,18 +9,21 @@ namespace Advanced_Concepts_3
         {
             try
             {
-                int a, b;
-                Console.WriteLine("Enter first number: ");
-                string input1 = Console.ReadLine();
-                a = int.Parse(input1);
-                Console.WriteLine("Enter second number: ");
-                string input2 = Console.ReadLine();
-                b = int.Parse(input2);
+                BankAccount bankAccount = new BankAccount();
 
-                int c = a / b;
-                Console.WriteLine("Result of division is: " + c);
+                Console.Write("Enter account holder name: ");
+                bankAccount.AccountHolderName = Console.ReadLine();
+                Console.Write("Enter account number: ");
+                bankAccount.AccountNumber = int.Parse(Console.ReadLine());
+                Console.Write("Enter current balance: ");
+                bankAccount.CurrentBalance = double.Parse(Console.ReadLine());
+
+                Console.WriteLine("\nNew bank account details: ");
+                Console.WriteLine("Account holder name: " + bankAccount.AccountHolderName);
+                Console.WriteLine("Account number: " + bankAccount.AccountNumber);
+                Console.WriteLine("Current balance: " + bankAccount.CurrentBalance);
             }
-            catch (DivideByZeroException ex) {
+            catch (FormatException ex) {
                 Console.WriteLine(ex.Message);
             }
             finally

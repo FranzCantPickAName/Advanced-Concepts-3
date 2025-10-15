@@ -1,29 +1,11 @@
 ﻿namespace ClassLibrary1
 {
-    public class Student
+
+    public class BankAccount
     {
-        public double SecuredMarks;
-        public double MaxMarks;
-        public double Percentage;
-    }
-
-    public class MarksCalculation
-    {
-        public void CalculatePercentage(Student s)
-        {
-            CalculationHelper ch = new CalculationHelper();
-            s.Percentage = ch.Multiply(s.SecuredMarks / s.MaxMarks, 100);
-        }
-
-        public class CalculationHelper
-        {
-            public double Multiply(double n1, double n2)
-            {
-                return n1 * n2;
-            }
-
-        }
-
+        public string AccountHolderName { get; set; }
+        public int AccountNumber { get; set; }
+        public double CurrentBalance { get; set; }
     }
 
 }
