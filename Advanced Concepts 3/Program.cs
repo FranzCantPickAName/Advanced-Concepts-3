@@ -1,36 +1,105 @@
-﻿using ClassLibrary1;
-using System;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
-using System.Runtime.Serialization.Formatters.Binary;
-using System.Web.Script.Serialization;
-
-namespace Advanced_Concepts_3
+using System.Xml.Serialization;
+namespace XmlSerializerExample
 {
-    internal class Program
+    [Serializable]
+    public class Continent
+    {
+        public string ContinentName { get; set; }
+        public List<Country> Countries { get; set; }
+    }
+    [Serializable]
+    public class Country
+    {
+        public int CountryID { get; set; }
+        public string CountryName { get; set; }
+    }
+    class Program
     {
         static void Main()
         {
-            Customer customer = new Customer() { CustomerID = 1, CustomerName = "Nancy", age = 20 };
-
-            JavaScriptSerializer javaScriptSerializer = new JavaScriptSerializer();
-            string filePath = @"c:\practice\customer.txt";
-            StreamWriter streamWriter = new StreamWriter(filePath);
-
-            string json = javaScriptSerializer.Serialize(customer);
-            streamWriter.WriteLine(json);
-            streamWriter.Close();
-            Console.WriteLine(json);
-            Console.WriteLine("File serialized.");
-
-            StreamReader streamReader = new StreamReader(filePath);
-            Customer customer_from_file = javaScriptSerializer.Deserialize(streamReader.ReadToEnd(), typeof(Customer)) as Customer;
-
-            Console.WriteLine("\nData after deserialization: ");
-            Console.WriteLine("Customer ID: " + customer_from_file.CustomerID);
-            Console.WriteLine("Customer Name: " + customer_from_file.CustomerName);
-            Console.WriteLine("Customer Age: " + customer_from_file.age);
-
+            //create data
+            List<Continent> continents = new List<Continent>();
+            continents.Add(new Continent()
+            {
+                ContinentName = "Africa",
+                Countries =
+              new List<Country>()
+              {
+          new Country() { CountryID = 1, CountryName = "Sudan"},
+          new Country() { CountryID = 2, CountryName = "Libya"},
+          new Country() { CountryID = 3, CountryName = "South Africa"}
+              }
+            });
+            continents.Add(new Continent()
+            {
+                ContinentName = "Asia",
+                Countries =
+              new List<Country>()
+              {
+          new Country() { CountryID = 4, CountryName = "Iran"},
+          new Country() { CountryID = 5, CountryName = "China"},
+          new Country() { CountryID = 6, CountryName = "Soth Korea"}
+              }
+            });
+            continents.Add(new Continent()
+            {
+                ContinentName = "Europe",
+                Countries =
+              new List<Country>()
+              {
+          new Country() { CountryID = 7, CountryName = "Gremany"},
+          new Country() { CountryID = 8, CountryName = "Ukraine"},
+          new Country() { CountryID = 9, CountryName = "France"}
+              }
+            });
+            continents.Add(new Continent()
+            {
+                ContinentName = "North America",
+                Countries =
+              new List<Country>()
+              {
+          new Country() { CountryID = 10, CountryName = "Canada"},
+          new Country() { CountryID = 11, CountryName = "United States"},
+          new Country() { CountryID = 12, CountryName = "Mexico"}
+              }
+            });
+            continents.Add(new Continent()
+            {
+                ContinentName = "South America",
+                Countries =
+              new List<Country>()
+              {
+          new Country() { CountryID = 13, CountryName = "Brazil"},
+          new Country() { CountryID = 14, CountryName = "Argentina"},
+          new Country() { CountryID = 15, CountryName = "Peru"}
+              }
+            });
+            XmlSerializer xmlSerializer = new XmlSerializer(typeof(List<Continent>));
+            string filePath = @"c:\practice\continents.xml";
+            //Serialize
+            FileStream fileStream = new FileStream(filePath, FileMode.Create, FileAccess.Write);
+            xmlSerializer.Serialize(fileStream, continents);
+            fileStream.Close();
+            Console.WriteLine("continents.xml created");
+            //Deserialize
+            FileStream fileStream2 = new FileStream(filePath, FileMode.Open, FileAccess.Read);
+            List<Continent> continents_from_file = xmlSerializer.Deserialize(fileStream2) as List<Continent>;
+            Console.WriteLine("\ncontinents.xml deserialized:");
+            foreach (Continent cont in continents_from_file)
+            {
+                Console.WriteLine(cont.ContinentName);
+                foreach (Country country in cont.Countries)
+                {
+                    Console.Write(country.CountryName + ", ");
+                }
+                Console.WriteLine();
+            }
             Console.ReadKey();
         }
     }
 }
+//Continent - with countries
+
