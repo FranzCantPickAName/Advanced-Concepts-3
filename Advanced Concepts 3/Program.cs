@@ -7,17 +7,26 @@ namespace Advanced_Concepts_3
     {
         static void Main()
         {
-            MarksCalculation.CalculationHelper ch = new MarksCalculation.CalculationHelper();
+            try
+            {
+                int a, b;
+                Console.WriteLine("Enter first number: ");
+                string input1 = Console.ReadLine();
+                a = int.Parse(input1);
+                Console.WriteLine("Enter second number: ");
+                string input2 = Console.ReadLine();
+                b = int.Parse(input2);
 
-            Console.WriteLine(ch.Multiply(10, 5));
-
-            MarksCalculation mc = new MarksCalculation();
-            Student s = new Student() { SecuredMarks = 35, MaxMarks = 50 };
-
-            mc.CalculatePercentage(s);
-            Console.WriteLine(s.Percentage);
-
-            Console.ReadKey();
+                int c = a / b;
+                Console.WriteLine("Result of division is: " + c);
+            }
+            catch (DivideByZeroException ex) {
+                Console.WriteLine(ex.Message);
+            }
+            finally
+            {
+                Console.ReadKey();
+            }
         }
     }
 }
