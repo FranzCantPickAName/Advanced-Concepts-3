@@ -1,35 +1,53 @@
-﻿using ClassLibrary1;
-using System;
-
-namespace Advanced_Concepts_3
+﻿using System;
+namespace IndexOutOfRangeExceptionExample
 {
-    internal class Program
+    class BankAccount
+    {
+        public string AccountHolderName { get; set; }
+        public int AccountNumber { get; set; }
+        public double CurrentBalance { get; set; }
+    }
+    class Program
     {
         static void Main()
         {
             try
             {
-                BankAccount bankAccount = new BankAccount();
-
-                Console.Write("Enter account holder name: ");
-                bankAccount.AccountHolderName = Console.ReadLine();
-                Console.Write("Enter account number: ");
-                bankAccount.AccountNumber = int.Parse(Console.ReadLine());
-                Console.Write("Enter current balance: ");
-                bankAccount.CurrentBalance = double.Parse(Console.ReadLine());
-
-                Console.WriteLine("\nNew bank account details: ");
-                Console.WriteLine("Account holder name: " + bankAccount.AccountHolderName);
-                Console.WriteLine("Account number: " + bankAccount.AccountNumber);
-                Console.WriteLine("Current balance: " + bankAccount.CurrentBalance);
+                BankAccount[] bankAccounts = new BankAccount[]
+                {
+        new BankAccount() { AccountNumber = 101, AccountHolderName = "Steven", CurrentBalance = 1000 },
+        new BankAccount() { AccountNumber = 102, AccountHolderName = "Sara", CurrentBalance = 950 },
+        new BankAccount() { AccountNumber = 103, AccountHolderName = "Mary", CurrentBalance = 456 }
+                };
+                for (int i = 0; i < bankAccounts.Length; i++)
+                {
+                    Console.WriteLine($"{i + 1}. {bankAccounts[i].AccountNumber}, {bankAccounts[i].AccountHolderName}, {bankAccounts[i].CurrentBalance}");
+                }
+                int serialNumber;
+                Console.Write("Enter account serial number to print: ");
+                serialNumber = int.Parse(Console.ReadLine());
+                serialNumber--;
+                if (serialNumber < 0 || serialNumber >= bankAccounts.Length)
+                {
+                    Console.WriteLine("Invalid serial number");
+                }
+                else
+                {
+                    BankAccount selectedBankAccount = bankAccounts[serialNumber]; //throws IndexOutOfRangeException
+                    Console.WriteLine("Selected Bank Account Details:");
+                    Console.WriteLine("Account Number: " + selectedBankAccount.AccountNumber);
+                    Console.WriteLine("Account Holder Name: " + selectedBankAccount.AccountHolderName);
+                    Console.WriteLine("Current Balance: " + selectedBankAccount.CurrentBalance);
+                }
             }
-            catch (FormatException ex) {
+            catch (IndexOutOfRangeException ex) //catches IndexOutOfRangeException
+            {
                 Console.WriteLine(ex.Message);
             }
-            finally
-            {
-                Console.ReadKey();
-            }
+
+            Console.ReadKey();
         }
     }
 }
+
+
