@@ -1,29 +1,14 @@
-﻿namespace ClassLibrary1
+﻿using System;
+
+namespace ClassLibrary1
 {
-    public class Student
+    [Serializable]
+    public class Country
     {
-        public double SecuredMarks;
-        public double MaxMarks;
-        public double Percentage;
-    }
-
-    public class MarksCalculation
-    {
-        public void CalculatePercentage(Student s)
-        {
-            CalculationHelper ch = new CalculationHelper();
-            s.Percentage = ch.Multiply(s.SecuredMarks / s.MaxMarks, 100);
-        }
-
-        public class CalculationHelper
-        {
-            public double Multiply(double n1, double n2)
-            {
-                return n1 * n2;
-            }
-
-        }
-
+        public short CountryID {  get; set; }
+        public string CountryName { get; set; }
+        public long Population {  get; set; }
+        public string Region { get; set; }
     }
 
 }
