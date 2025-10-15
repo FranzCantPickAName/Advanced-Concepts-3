@@ -1,11 +1,12 @@
-﻿namespace ClassLibrary1
+﻿using System;
+
+namespace ClassLibrary1
 {
 
-    public class BankAccount
+    public class MyCustomException : Exception
     {
-        public string AccountHolderName { get; set; }
-        public int AccountNumber { get; set; }
-        public double CurrentBalance { get; set; }
+        public MyCustomException(string message) : base(message) { }
+
     }
 
 }

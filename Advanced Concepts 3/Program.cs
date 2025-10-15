@@ -1,4 +1,6 @@
-﻿using System;
+﻿using ClassLibrary1;
+using System;
+using System.IO;
 namespace IndexOutOfRangeExceptionExample
 {
     class BankAccount
@@ -9,43 +11,102 @@ namespace IndexOutOfRangeExceptionExample
     }
     class Program
     {
+
+        static string logFile = "exception.log";
+
         static void Main()
+        {
+
+            if (File.Exists(logFile))
+                File.Delete(logFile);
+
+            HandleException(() => int.Parse("abc"), "FormatException");
+            HandleException(() =>
+            {
+                int[] arr = { 1, 2, 3 };
+                Console.WriteLine(arr[5]);
+            },
+            "IndexOutOfRangeException");
+            HandleException(() =>
+            {
+                string str = null;
+                Console.WriteLine(str.Length);
+            },
+            "NullReferenceException");
+            HandleException(() =>
+            {
+                string str = null;
+                Console.WriteLine(str.ToUpper());
+            },
+            "ArgumentNullException");
+            HandleException(() =>
+            {
+                try
+                {
+                    int.Parse("xyz");
+
+                }
+                catch (FormatException ex)
+                {
+                    throw new InvalidOperationException("Invalid operation", ex);
+                }
+            },
+            "Inner Exception Example");
+            HandleException(() =>
+            {
+                string text = "Hello";
+                Console.WriteLine(text.Substring(10));
+            },
+            "ArgumentOutOfRangeException");
+            HandleException(() =>
+            {
+                string path = "";
+                System.IO.Path.GetFullPath(path);
+            },
+            "ArgumentException");
+            HandleException(() =>
+            {
+                var enumerator = new int[] { 1, 2, 3 }.GetEnumerator();
+                enumerator.Reset();
+            },
+            "InvalidOperationException");
+            HandleException(() =>
+            {
+                throw new MyCustomException("This is a custom exception!");
+            },
+            "CustomException");
+
+            Console.WriteLine("All exceptions have been logged to exception.log");
+
+            Console.ReadKey();
+        }
+
+        static void HandleException(Action action, string exceptionName)
         {
             try
             {
-                BankAccount[] bankAccounts = new BankAccount[]
-                {
-        new BankAccount() { AccountNumber = 101, AccountHolderName = "Steven", CurrentBalance = 1000 },
-        new BankAccount() { AccountNumber = 102, AccountHolderName = "Sara", CurrentBalance = 950 },
-        new BankAccount() { AccountNumber = 103, AccountHolderName = "Mary", CurrentBalance = 456 }
-                };
-                for (int i = 0; i < bankAccounts.Length; i++)
-                {
-                    Console.WriteLine($"{i + 1}. {bankAccounts[i].AccountNumber}, {bankAccounts[i].AccountHolderName}, {bankAccounts[i].CurrentBalance}");
-                }
-                int serialNumber;
-                Console.Write("Enter account serial number to print: ");
-                serialNumber = int.Parse(Console.ReadLine());
-                serialNumber--;
-                if (serialNumber < 0 || serialNumber >= bankAccounts.Length)
-                {
-                    Console.WriteLine("Invalid serial number");
-                }
-                else
-                {
-                    BankAccount selectedBankAccount = bankAccounts[serialNumber]; //throws IndexOutOfRangeException
-                    Console.WriteLine("Selected Bank Account Details:");
-                    Console.WriteLine("Account Number: " + selectedBankAccount.AccountNumber);
-                    Console.WriteLine("Account Holder Name: " + selectedBankAccount.AccountHolderName);
-                    Console.WriteLine("Current Balance: " + selectedBankAccount.CurrentBalance);
-                }
+                action();
             }
-            catch (IndexOutOfRangeException ex) //catches IndexOutOfRangeException
-            {
-                Console.WriteLine(ex.Message);
-            }
+            catch (Exception ex)
+            {
+                string message = $"{exceptionName}: {ex.Message}";
+                Console.WriteLine(message);
 
-            Console.ReadKey();
+                if (ex.InnerException != null)
+                {
+                    message += $"\nInner Exception: {ex.InnerException.Message}";
+                }
+                LogToFile(message);
+            }
+        }
+
+
+        static void LogToFile(string message)
+        {
+            using (StreamWriter writer = new StreamWriter(logFile, true))
+            {
+                writer.WriteLine($"{DateTime.Now}: {message}");
+            }
         }
     }
 }
