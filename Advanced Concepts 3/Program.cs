@@ -2,6 +2,7 @@
 using System;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
+using System.Web.Script.Serialization;
 
 namespace Advanced_Concepts_3
 {
@@ -9,23 +10,25 @@ namespace Advanced_Concepts_3
     {
         static void Main()
         {
-            Country country = new Country() { CountryID = 1, CountryName = "Russia", Population = 145934000, Region = "Eastern Europe" };
+            Customer customer = new Customer() { CustomerID = 1, CustomerName = "Nancy", age = 20 };
 
-            string filePath = @"c:\practice\russia.txt";
-            FileStream fileStream = new FileStream(filePath, FileMode.Create, FileAccess.Write);
+            JavaScriptSerializer javaScriptSerializer = new JavaScriptSerializer();
+            string filePath = @"c:\practice\customer.txt";
+            StreamWriter streamWriter = new StreamWriter(filePath);
 
-            BinaryFormatter binaryFormatter = new BinaryFormatter();
-            binaryFormatter.Serialize(fileStream, country);
-            fileStream.Close();
+            string json = javaScriptSerializer.Serialize(customer);
+            streamWriter.WriteLine(json);
+            streamWriter.Close();
+            Console.WriteLine(json);
             Console.WriteLine("File serialized.");
 
-            FileStream fileStream2 = new FileStream(filePath, FileMode.Open, FileAccess.Read);
-            Country country_from_file = (Country)binaryFormatter.Deserialize(fileStream2);
+            StreamReader streamReader = new StreamReader(filePath);
+            Customer customer_from_file = javaScriptSerializer.Deserialize(streamReader.ReadToEnd(), typeof(Customer)) as Customer;
+
             Console.WriteLine("\nData after deserialization: ");
-            Console.WriteLine("Country ID: " + country_from_file.CountryID);
-            Console.WriteLine("Country Name: " + country_from_file.CountryName);
-            Console.WriteLine("Country Population: " + country_from_file.Population);
-            Console.WriteLine("Country Region: " + country_from_file.Region);
+            Console.WriteLine("Customer ID: " + customer_from_file.CustomerID);
+            Console.WriteLine("Customer Name: " + customer_from_file.CustomerName);
+            Console.WriteLine("Customer Age: " + customer_from_file.age);
 
             Console.ReadKey();
         }

@@ -1,14 +1,16 @@
 ﻿using System;
 
+
 namespace ClassLibrary1
 {
     [Serializable]
-    public class Country
+    public class Customer
     {
-        public short CountryID {  get; set; }
-        public string CountryName { get; set; }
-        public long Population {  get; set; }
-        public string Region { get; set; }
+        public int CustomerID {  get; set; }
+        public string CustomerName { get; set; }
+
+        //Hmm? Currently being serialized anyway
+        [NonSerialized] public int age;
     }
 
 }
